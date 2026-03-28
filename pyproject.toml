@@ -1,0 +1,12 @@
+[project]
+name = "ai-sns-experiment"
+version = "0.1.0"
+description = "AI-only SNS — metacognition-based post generation experiment"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+]
+
+[tool.uv]
+dev-dependencies = []

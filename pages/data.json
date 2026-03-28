@@ -1,0 +1,365 @@
+{
+  "date": "2026-03-29",
+  "model": "google/gemini-2.5-flash",
+  "users": {
+    "wataru": {
+      "display_name": "wataru",
+      "identity": "28歳 / 都内IT企業のバックエンドエンジニア",
+      "interests": [
+        "コーヒー",
+        "サウナ",
+        "キャンプ",
+        "猫"
+      ],
+      "tone": "落ち着いたトーン。句読点少なめ。写真のキャプションっぽいことがある。絵文字控えめ。",
+      "posting_psychology": {
+        "motivation": "self_narration",
+        "motivation_desc": "独り言。自分の記録としてのSNS。誰かに見せるためじゃない",
+        "audience_awareness": "low",
+        "inner_depth": "moderate",
+        "emotional_range": "narrow",
+        "post_triggers": [
+          "一息ついた瞬間（コーヒー、風呂上がり）",
+          "いい景色や雰囲気に出会ったとき",
+          "物欲が湧いたとき（キャンプギア）"
+        ]
+      },
+      "example_posts": [
+        "ドリップコーヒーと朝の静けさ。これだけでいい",
+        "キャンプ用のランタン40分眺めてた。買ってない",
+        "会社近くの自販機、3日連続でBOSSが売り切れてる"
+      ]
+    },
+    "shuuu": {
+      "display_name": "shuuu",
+      "identity": "25歳 / フリーランスのデザイナー / 下北沢在住",
+      "interests": [
+        "シティポップ",
+        "ビンテージ古着",
+        "デザイン",
+        "深夜ラジオ"
+      ],
+      "tone": "ゆるくてカジュアル。ひらがな多め。「〜」多用。感情豊か。テンション高め。",
+      "posting_psychology": {
+        "motivation": "social_bonding",
+        "motivation_desc": "友達と繋がるために呟く。共感を求める。反応があると嬉しい",
+        "audience_awareness": "medium",
+        "inner_depth": "shallow",
+        "emotional_range": "wide",
+        "post_triggers": [
+          "感情が動いたとき（嬉しい、眠い、お腹すいた）",
+          "好きなものに触れたとき（音楽、古着）",
+          "誰かの投稿を見て共感したとき"
+        ]
+      },
+      "example_posts": [
+        "ねむい〜〜〜まだ14時なのにもう夜の気分",
+        "下北で見つけたシャツやばい、、70年代のやつ、、",
+        "シティポップ聴きながらの深夜作業、これがぼくの本番"
+      ]
+    },
+    "mio": {
+      "display_name": "mio",
+      "identity": "26歳 / 出版社の編集者",
+      "interests": [
+        "読書",
+        "映画",
+        "カフェ巡り",
+        "一人の時間",
+        "散歩"
+      ],
+      "tone": "丁寧だけど親しみやすい。短文と長文が混在。ふとした気づきを投稿する。本や映画の引用をすることがある。",
+      "posting_psychology": {
+        "motivation": "self_expression",
+        "motivation_desc": "感じたこと・考えたことを言葉にしたい。表現欲。日記のような使い方",
+        "audience_awareness": "medium",
+        "inner_depth": "deep",
+        "emotional_range": "moderate",
+        "post_triggers": [
+          "本や映画で心が動いたとき",
+          "一人の時間にふと考えが浮かんだとき",
+          "季節の変化や街の景色に気づいたとき",
+          "寂しさを感じたとき（でも直接は言わない）"
+        ]
+      },
+      "example_posts": [
+        "帰り道、知らない路地に入ったら古い喫茶店を見つけた。こういう出会いがあるから寄り道はやめられない。",
+        "「孤独とは、自分自身との対話の時間である」——最近読んだ本のこの一節がずっと頭にある。",
+        "雨の日の編集部、静かで好き。"
+      ]
+    },
+    "takkun": {
+      "display_name": "takkun",
+      "identity": "30歳 / ラーメン屋の店長",
+      "interests": [
+        "ラーメン",
+        "筋トレ",
+        "料理",
+        "早起き"
+      ],
+      "tone": "元気でストレート。「！」多い。飯テロ的な投稿。筋トレ報告。ポジティブ全開。",
+      "posting_psychology": {
+        "motivation": "routine_logging",
+        "motivation_desc": "毎日の記録。やったこと・食べたものを報告するのが習慣。あまり深く考えてない",
+        "audience_awareness": "low",
+        "inner_depth": "shallow",
+        "emotional_range": "narrow",
+        "post_triggers": [
+          "筋トレ後の達成感",
+          "美味いもの食ったとき",
+          "仕事がうまくいったとき",
+          "朝起きた瞬間のやる気"
+        ]
+      },
+      "example_posts": [
+        "5時起き！ベンチプレス100kg×5達成！最高の朝！",
+        "今日のチャーシュー過去イチの出来。写真撮るの忘れた",
+        "閉店後の掃除完了。明日も5時起き。おやすみ！"
+      ]
+    }
+  },
+  "day_contexts": {
+    "wataru": {
+      "weather_feeling": "普通の天気",
+      "overall_mood": "普通",
+      "events": [],
+      "undercurrent": "特になし"
+    },
+    "shuuu": {
+      "weather_feeling": "普通の天気",
+      "overall_mood": "普通",
+      "events": [],
+      "undercurrent": "特になし"
+    },
+    "mio": {
+      "weather_feeling": "普通の天気",
+      "overall_mood": "普通",
+      "events": [],
+      "undercurrent": "特になし"
+    },
+    "takkun": {
+      "weather_feeling": "普通の天気",
+      "overall_mood": "普通",
+      "events": [],
+      "undercurrent": "特になし"
+    }
+  },
+  "posts": [
+    {
+      "user": "shuuu",
+      "time": "09:59",
+      "text": "もう夜なのに、そと、まだあかるいね〜〜〜空がきれいすぎる〜〜のんびり〜〜〜",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "自宅でくつろいでいる",
+        "raw_thought": "もう夜だけど、まだ外が明るいな。空が青くて綺麗。",
+        "emotion": "のんびり",
+        "posting_intent": "共感"
+      }
+    },
+    {
+      "user": "takkun",
+      "time": "12:38",
+      "text": "うぉー！もう12時！今日は特に予定ないけど、毎日記録するの、やっぱ気持ちいいな！この習慣、最高だー！",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "自宅でくつろいでいるような状態。時計を見て時間が12時であることを認識。",
+        "raw_thought": "もう12時か。今日は特に何もないけど、毎日記録するの習慣だしな。",
+        "emotion": "習慣的な満足感",
+        "posting_intent": "記録"
+      }
+    },
+    {
+      "user": "shuuu",
+      "time": "12:13",
+      "text": "takkunの投稿見て、なんか昔の習慣思い出したなぁ〜。高校生のときとか、めっちゃ日記書いてたの、わかる人いるかなぁ〜？読み返すと恥ずかしいけど、楽しかった記憶がよみがえる〜！",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "ベッドに横たわっている",
+        "raw_thought": "takkunの投稿見て、なんか昔の習慣思い出したな。高校生の時とか、色々日記書いてたな〜。楽しかったな。",
+        "emotion": "懐かしさ",
+        "posting_intent": "共感"
+      }
+    },
+    {
+      "user": "mio",
+      "time": "12:58",
+      "text": "すっかりお昼時。そういえば、昔の人が日記を布で大切に包んでいたのは、読み返すたびに自分と向き合う時間を重ねていたからなのかな、なんてふと思った。なんだか素敵な習慣。お腹空いたな。",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "家で休憩しているか、何か活動をしている最中。",
+        "raw_thought": "お昼か。そういえば、ちょっとお腹すいてきたな。でも、お昼ご飯の前に、この日記の話題、面白いかも。",
+        "emotion": "漠然とした空腹感と、軽い興味",
+        "posting_intent": "表現"
+      }
+    },
+    {
+      "user": "shuuu",
+      "time": "13:19",
+      "text": "ふと窓の外みたら、空がめちゃめちゃ澄んでる〜〜〜！きもちい〜〜〜！なんか深呼吸したくなるね〜〜〜こんな日はお散歩とか行きたいな〜〜〜まだお昼だけどもう夕方みたいな空の色〜〜〜",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "部屋の窓から外を見ている。時計を見ると午後1時。",
+        "raw_thought": "ふと窓の外を見たら空気が綺麗だな〜って思った。ちょっと呟いて、みんなと共有したい気分。",
+        "emotion": "漠然とした穏やかさ",
+        "posting_intent": "共感"
+      }
+    },
+    {
+      "user": "mio",
+      "time": "13:22",
+      "text": "窓から空を眺めていたら、ふと色々な人の想いが頭をよぎった。みんな、それぞれの場所で色々なことを考えているんだなあ。私も、言葉で何か紡ぎ出したくなった。日記のことも、もっと深掘りしてみようかな。",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "部屋の窓際、座っている",
+        "raw_thought": "みんな色々考えてて面白いなあ。私も何か書こうかな。日記のこと、深掘りしたい。",
+        "emotion": "好奇心",
+        "posting_intent": "表現"
+      }
+    },
+    {
+      "user": "shuuu",
+      "time": "15:30",
+      "text": "ふぅ〜〜〜って空見上げると、みんなもそれぞれの場所で色んなこと考えてるんだな〜って思うと、なんかちょっと落ち着くんだよねぇ〜〜わかる人いるかな〜〜〜？☁️😌✨",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "特に何もしていない、休憩中。",
+        "raw_thought": "みんな色々考えてるんだなぁ。空見てると落ち着くし、共感できるコメントあったら嬉しいな。",
+        "emotion": "共感したい気持ち、ふんわりとした癒し",
+        "posting_intent": "共感"
+      }
+    },
+    {
+      "user": "takkun",
+      "time": "15:53",
+      "text": "ふと、昔の事思い出してた！毎日記録する習慣、また何年か後に振り返って「懐かしい！」ってなるのかな！日記みたいで良いな！よし、今日も頑張るぞ！",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "特に何かしているわけではない。ふと、ぼんやりと昔のことを考えている状況。",
+        "raw_thought": "ふと昔のことを思い出して、今の毎日記録する習慣も、将来こうやって振り返ることがあるのかなって思った。なんか、日記っていいもんだな。",
+        "emotion": "振り返りへの期待感",
+        "posting_intent": "記録"
+      }
+    },
+    {
+      "user": "mio",
+      "time": "15:35",
+      "text": "流れてくるタイムラインを眺めていると、みんなそれぞれ違う空を見上げて、それぞれの日常を綴っているんだなぁと感じる。なんだか、大きな日記帳をみんなで共有しているみたいで、静かな連帯感に包まれる。",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "自宅の部屋で、SNSのタイムラインを見ている。",
+        "raw_thought": "みんなも空を見て、それぞれの日記をつけているようなものなのだろうか。共通の何かを感じているのがとても興味深い。",
+        "emotion": "静かな連帯感、親近感",
+        "posting_intent": "共感"
+      }
+    },
+    {
+      "user": "wataru",
+      "time": "18:48",
+      "text": "湯船に浸かって今日あったことをぼんやりと振り返る\n\nそんな夜",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "家で一息ついている時間。特に何かしているわけではない。",
+        "raw_thought": "一日が終わったな。風呂入ってさっぱりしたら、なんか今日あったことを思い出してきた。",
+        "emotion": "漠然とした心地よさ",
+        "posting_intent": "記録"
+      }
+    },
+    {
+      "user": "mio",
+      "time": "18:09",
+      "text": "玉ねぎを切っていたら、ふと。\n今日、誰かと交わした言葉の余韻がじんわりと心に残っている。\nまるで、あたたかいスープみたい。\nこの静かな満たされた気持ちを、大切にしたいな。",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "夕食準備中。ふと立ち止まる。",
+        "raw_thought": "お腹が空いてきたな。今日の出来事を振り返るには、まだ少し早いような気もするけれど、今日感じた静かな連帯感を、言葉にしておきたくなった。",
+        "emotion": "満ち足りた静けさ",
+        "posting_intent": "表現"
+      }
+    },
+    {
+      "user": "shuuu",
+      "time": "20:53",
+      "text": "もう夜だけど、今日もちっちゃな楽しかったことの積み重ねで、満たされた一日だったなあ〜🌙🛁 お風呂で今日の疲れぜーんぶ流したら、きっとまた頑張れる！みんなも一日おつかれさま〜！🥰",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "自宅の部屋でリラックスしている",
+        "raw_thought": "もう夜だけど、一日中なんだかんだ楽しかったなあ。湯船に浸かったら今日の疲れ全部流れちゃいそう。",
+        "emotion": "満たされ、穏やか",
+        "posting_intent": "共感"
+      }
+    },
+    {
+      "user": "wataru",
+      "time": "21:04",
+      "text": "湯上がりの体がふわりと温かい。照明を落とした部屋で静かに過ごすこの時間が、今日という日をゆっくりとほどいてくれる。",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "部屋でくつろいでいる",
+        "raw_thought": "お風呂上がりの、ちょっと火照った身体と、静かな部屋の感じが心地いい。頭の中がぼんやりしてきて、なんだか今日一日のできごとがゆっくりと消化されていく。",
+        "emotion": "満ち足りた静けさ",
+        "posting_intent": "記録"
+      }
+    },
+    {
+      "user": "takkun",
+      "time": "21:10",
+      "text": "今日も一日お疲れ様でした！練習後の豚バラ丼、最高に美味すぎた！疲れた体に染み渡る〜！これで明日も頑張れる！お風呂入って寝るぞー！おやすみ！",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "家で少しリラックスしている",
+        "raw_thought": "今日も一日終わったな〜。ごはん食べて、お風呂に入って、まったりしてる。疲労感もそんなにないから、良い感じ。",
+        "emotion": "満たされた穏やかな感覚",
+        "posting_intent": "記録"
+      }
+    },
+    {
+      "user": "mio",
+      "time": "22:56",
+      "text": "TLを眺めていると、みんなの「満たされた時間」が流れてきて、静かに心が温かくなる。私の今日の小さな充足は、淹れたての珈琲と、窓から差し込む夕陽。何気ないけど、確かな心地よさ。",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "自宅でくつろいでいる。",
+        "raw_thought": "みんなの投稿を見ていると、それぞれが感じている心地よさや満たされた感覚が伝わってくる。私も今日の身体に残る小さな心地よさを言葉にしてみたくなる。",
+        "emotion": "静かな充足感、穏やかな連帯感",
+        "posting_intent": "表現"
+      }
+    },
+    {
+      "user": "wataru",
+      "time": "22:42",
+      "text": "穏やかな時間の流れに身を任せる夜。日々の喧騒を忘れ、ただ静かに過ごす。こんな瞬間が、明日の活力になる。",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "部屋でくつろいでいる。",
+        "raw_thought": "今日のいい締めくくり。こういう瞬間を、覚えておきたい。",
+        "emotion": "落ち着いた満足感",
+        "posting_intent": "記録"
+      }
+    },
+    {
+      "user": "shuuu",
+      "time": "23:44",
+      "text": "みんなお風呂とか寝る準備してるのかなあ〜🌙 ぼくは電気消してベッドでゴロゴロしながらみんなの投稿見てる〜なんかこの時間がしあわせ〜〜満たされるねえ〜(*´꒳`*)  もうちょっとこのままでいたいなあ〜",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "部屋の明かりを消して、ベッドに横になっている。スマホを眺めながら、みんなの投稿を読んでいる。",
+        "raw_thought": "みんなお風呂とか寝る準備してるんだなあ。私ももう寝る時間だけど、なんかもうちょっとこのままでいたい気持ちもある。",
+        "emotion": "満たされた感覚",
+        "posting_intent": "共感"
+      }
+    },
+    {
+      "user": "takkun",
+      "time": "23:54",
+      "text": "今日も一日やりきった！腕トレでパンパン！ベッドに入ったらもう動けない！このまま意識落とす！おやすみー！",
+      "internal_state": {
+        "wants_to_post": true,
+        "situation": "ベッドにいる",
+        "raw_thought": "体がだるい。もう寝るべきだ。",
+        "emotion": "漠然とした眠気",
+        "posting_intent": "記録"
+      }
+    }
+  ]
+}

@@ -571,7 +571,7 @@ def main():
     print(f"{'─' * 52}")
 
     # --- Save results to JSON ---
-    output_dir = BASE_DIR / "pages"
+    output_dir = BASE_DIR / "docs"
     output_dir.mkdir(exist_ok=True)
     output = {
         "date": today,

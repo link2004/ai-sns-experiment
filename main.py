@@ -2,9 +2,9 @@
 AI-only SNS — Metacognition-based post generation
 
 3-layer context model:
-  Layer 1: Persona (static) — who they are + SNS psychology
-  Layer 2: Day context (Stage 0) — what kind of day it is (generated once per user)
-  Layer 3: Internal state (Stage 1) → Post (Stage 2) — 2-stage generation per post
+  Layer 1: Persona from real preference_analysis data (structured_contents)
+  Layer 2: Day context (Stage 0) — generated from persona's daily_life/interests
+  Layer 3: Internal state (Stage 1) → Post (Stage 2)
 
 Usage: uv run python main.py [--debug]
 """
@@ -12,9 +12,9 @@ Usage: uv run python main.py [--debug]
 import json
 import os
 import random
+import re
 import sys
 import time
-from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
@@ -24,6 +24,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = Path(__file__).parent
+DATA_DIR = BASE_DIR / "data"
 
 # ============================================================
 # Config
@@ -34,134 +35,8 @@ MODEL = "google/gemini-2.5-flash"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 HOURS = [7, 8, 9, 12, 13, 15, 18, 19, 20, 21, 22, 23]
 
-# ============================================================
-# Layer 1: Personas (static)
-# ============================================================
-
-USERS = {
-    "wataru": {
-        "display_name": "wataru",
-        "identity": "28歳 / 都内IT企業のバックエンドエンジニア",
-        "interests": ["コーヒー", "サウナ", "キャンプ", "猫"],
-        "tone": "落ち着いたトーン。句読点少なめ。写真のキャプションっぽいことがある。絵文字控えめ。",
-        "posting_psychology": {
-            "motivation": "self_narration",
-            "motivation_desc": "独り言。自分の記録としてのSNS。誰かに見せるためじゃない",
-            "audience_awareness": "low",
-            "inner_depth": "moderate",
-            "emotional_range": "narrow",
-            "post_triggers": [
-                "一息ついた瞬間（コーヒー、風呂上がり）",
-                "いい景色や雰囲気に出会ったとき",
-                "物欲が湧いたとき（キャンプギア）",
-            ],
-        },
-        "relationships": {
-            "shuuu": "共通の友人経由で知り合い。音楽の趣味が合う",
-            "mio": "本の話が合う。落ち着いた雰囲気が似てる",
-            "takkun": "正反対のテンションだけど嫌いじゃない",
-        },
-        "example_posts": [
-            "ドリップコーヒーと朝の静けさ。これだけでいい",
-            "キャンプ用のランタン40分眺めてた。買ってない",
-            "会社近くの自販機、3日連続でBOSSが売り切れてる",
-        ],
-        "active_hours": [7, 8, 12, 18, 22, 23],
-        "post_frequency": "low",
-    },
-    "shuuu": {
-        "display_name": "shuuu",
-        "identity": "25歳 / フリーランスのデザイナー / 下北沢在住",
-        "interests": ["シティポップ", "ビンテージ古着", "デザイン", "深夜ラジオ"],
-        "tone": "ゆるくてカジュアル。ひらがな多め。「〜」多用。感情豊か。テンション高め。",
-        "posting_psychology": {
-            "motivation": "social_bonding",
-            "motivation_desc": "友達と繋がるために呟く。共感を求める。反応があると嬉しい",
-            "audience_awareness": "medium",
-            "inner_depth": "shallow",
-            "emotional_range": "wide",
-            "post_triggers": [
-                "感情が動いたとき（嬉しい、眠い、お腹すいた）",
-                "好きなものに触れたとき（音楽、古着）",
-                "誰かの投稿を見て共感したとき",
-            ],
-        },
-        "relationships": {
-            "wataru": "年上だけどタメ口。落ち着いてて好き",
-            "mio": "感性が近い。カフェとか一緒に行きたい",
-            "takkun": "テンション高くて元気もらえる",
-        },
-        "example_posts": [
-            "ねむい〜〜〜まだ14時なのにもう夜の気分",
-            "下北で見つけたシャツやばい、、70年代のやつ、、",
-            "シティポップ聴きながらの深夜作業、これがぼくの本番",
-        ],
-        "active_hours": [10, 13, 15, 18, 21, 22, 23],
-        "post_frequency": "high",
-    },
-    "mio": {
-        "display_name": "mio",
-        "identity": "26歳 / 出版社の編集者",
-        "interests": ["読書", "映画", "カフェ巡り", "一人の時間", "散歩"],
-        "tone": "丁寧だけど親しみやすい。短文と長文が混在。ふとした気づきを投稿する。本や映画の引用をすることがある。",
-        "posting_psychology": {
-            "motivation": "self_expression",
-            "motivation_desc": "感じたこと・考えたことを言葉にしたい。表現欲。日記のような使い方",
-            "audience_awareness": "medium",
-            "inner_depth": "deep",
-            "emotional_range": "moderate",
-            "post_triggers": [
-                "本や映画で心が動いたとき",
-                "一人の時間にふと考えが浮かんだとき",
-                "季節の変化や街の景色に気づいたとき",
-                "寂しさを感じたとき（でも直接は言わない）",
-            ],
-        },
-        "relationships": {
-            "wataru": "静かな人。本の話ができるのが嬉しい",
-            "shuuu": "自分にない軽さがあって元気をもらえる",
-            "takkun": "真逆だけどその真っ直ぐさに少し憧れる",
-        },
-        "example_posts": [
-            "帰り道、知らない路地に入ったら古い喫茶店を見つけた。こういう出会いがあるから寄り道はやめられない。",
-            "「孤独とは、自分自身との対話の時間である」——最近読んだ本のこの一節がずっと頭にある。",
-            "雨の日の編集部、静かで好き。",
-        ],
-        "active_hours": [8, 12, 18, 20, 21, 22, 23],
-        "post_frequency": "medium",
-    },
-    "takkun": {
-        "display_name": "takkun",
-        "identity": "30歳 / ラーメン屋の店長",
-        "interests": ["ラーメン", "筋トレ", "料理", "早起き"],
-        "tone": "元気でストレート。「！」多い。飯テロ的な投稿。筋トレ報告。ポジティブ全開。",
-        "posting_psychology": {
-            "motivation": "routine_logging",
-            "motivation_desc": "毎日の記録。やったこと・食べたものを報告するのが習慣。あまり深く考えてない",
-            "audience_awareness": "low",
-            "inner_depth": "shallow",
-            "emotional_range": "narrow",
-            "post_triggers": [
-                "筋トレ後の達成感",
-                "美味いもの食ったとき",
-                "仕事がうまくいったとき",
-                "朝起きた瞬間のやる気",
-            ],
-        },
-        "relationships": {
-            "wataru": "サウナ仲間。もっと一緒に行きたい",
-            "shuuu": "若いのに頑張ってる。飯食わせたい",
-            "mio": "お客さんで来てほしい",
-        },
-        "example_posts": [
-            "5時起き！ベンチプレス100kg×5達成！最高の朝！",
-            "今日のチャーシュー過去イチの出来。写真撮るの忘れた",
-            "閉店後の掃除完了。明日も5時起き。おやすみ！",
-        ],
-        "active_hours": [5, 6, 7, 12, 15, 21, 22],
-        "post_frequency": "medium",
-    },
-}
+# Anonymous display names for real users
+DISPLAY_NAMES = ["wataru", "shuuu", "mio", "takkun"]
 
 # Stage 1 angle hints — forces different perspective each time
 ANGLE_HINTS = [
@@ -174,6 +49,108 @@ ANGLE_HINTS = [
     "退屈で何か面白いことないかなと思ってる",
     "誰かのことをふと考えている",
 ]
+
+
+# ============================================================
+# Layer 1: Load personas from preference_analysis data
+# ============================================================
+
+
+def extract_section(sections: list[dict], key: str) -> dict | None:
+    """Extract a section by key from structured_contents."""
+    for s in sections:
+        if s.get("key") == key:
+            return s
+    return None
+
+
+def section_to_text(section: dict | None) -> str:
+    """Convert a section to readable text."""
+    if not section:
+        return ""
+    body = section.get("body", "")
+    if section.get("type") == "prose":
+        # Strip source refs like {1,5,9}
+        return re.sub(r"\{\d+(,\d+)*\}", "", str(body))
+    if section.get("type") == "list" and isinstance(body, list):
+        lines = []
+        for item in body:
+            label = item.get("label", "")
+            value = item.get("value", "")
+            lines.append(f"- {label}: {value}")
+        return "\n".join(lines)
+    return str(body)
+
+
+def axis_scores_summary(axis_scores: dict) -> str:
+    """Summarize axis_scores into readable text for prompts."""
+    lines = []
+    for category, axes in axis_scores.items():
+        if not isinstance(axes, list):
+            continue
+        for ax in axes:
+            score = ax.get("score", 3)
+            if score <= 2:
+                tendency = ax.get("low_label", "")
+            elif score >= 4:
+                tendency = ax.get("high_label", "")
+            else:
+                continue  # Skip neutral scores
+            axis_name = ax.get("axis", ax.get("id", ""))
+            desc = ax.get("description", "")
+            lines.append(f"- {axis_name}: {tendency}（{desc}）")
+    return "\n".join(lines) if lines else "特になし"
+
+
+def load_personas() -> dict[str, dict]:
+    """Load preference_analysis JSON files and build persona dicts."""
+    files = sorted(DATA_DIR.glob("user_*.json"))
+    if not files:
+        print(f"Error: No user data files found in {DATA_DIR}")
+        sys.exit(1)
+
+    personas = {}
+    for i, fpath in enumerate(files[: len(DISPLAY_NAMES)]):
+        with open(fpath, encoding="utf-8") as f:
+            sc = json.load(f)
+
+        name = DISPLAY_NAMES[i]
+        sections = sc.get("sections", [])
+        axis = sc.get("axis_scores", {})
+
+        # Extract all sections
+        personality = extract_section(sections, "personality")
+        roots = extract_section(sections, "roots")
+        interests = extract_section(sections, "interests")
+        daily_life = extract_section(sections, "daily_life")
+        food_shopping = extract_section(sections, "food_shopping")
+        relationships = extract_section(sections, "relationships")
+        romance = extract_section(sections, "romance")
+        inner_thoughts = extract_section(sections, "inner_thoughts")
+        future = extract_section(sections, "future")
+
+        personas[name] = {
+            "display_name": name,
+            "tagline": sc.get("tagline", ""),
+            "tagline_bullets": sc.get("tagline_bullets", []),
+            # Full sections as text (for prompts)
+            "personality": section_to_text(personality),
+            "roots": section_to_text(roots),
+            "interests": section_to_text(interests),
+            "daily_life": section_to_text(daily_life),
+            "food_shopping": section_to_text(food_shopping),
+            "relationships": section_to_text(relationships),
+            "romance": section_to_text(romance),
+            "inner_thoughts": section_to_text(inner_thoughts),
+            "future": section_to_text(future),
+            # Axis scores summary (non-neutral tendencies only)
+            "axis_summary": axis_scores_summary(axis),
+            # Raw structured data (for JSON output)
+            "_raw": sc,
+        }
+        print(f"  Loaded {name}: {sc.get('tagline', '?')}")
+
+    return personas
 
 
 # ============================================================
@@ -241,12 +218,27 @@ The day should be mundane and realistic — not dramatic.
 All text in Japanese."""
 
 STAGE0_USER_TEMPLATE = """\
-{name}（{identity}）の今日一日をシミュレートしてください。
-趣味・興味: {interests}
+以下の人物の今日一日をシミュレートしてください。
+
+【この人物について】
+{tagline}
+{tagline_bullets}
+
+【日常の過ごし方】
+{daily_life}
+
+【関心領域】
+{interests}
+
+【食・買い物の癖】
+{food_shopping}
+
+【性格の特徴的な傾向】
+{axis_summary_excerpt}
 
 以下のJSON形式で出力:
 {{
-  "weather_feeling": "天気に対する個人的な感じ方（例: 曇りだけど嫌いじゃない）",
+  "weather_feeling": "天気に対する個人的な感じ方",
   "overall_mood": "今日の基調となる気分（1文）",
   "events": [
     {{"hour": 7, "what": "具体的に何が起きたか（1文）"}},
@@ -256,36 +248,91 @@ STAGE0_USER_TEMPLATE = """\
 }}
 
 eventsは4〜6個。平凡な日常でOK。ドラマチックにしすぎない。
+この人の性格・生活リズム・好みに合った出来事にすること。
 時間は {hours} の中から選ぶこと。"""
 
 
-def generate_day_context(user_id: str, user: dict) -> dict:
-    """Stage 0: Generate day context for a user."""
+def generate_day_context(user_id: str, persona: dict) -> dict:
+    """Stage 0: Generate day context from preference_analysis data."""
+    # Pick a random subset of axis scores for variety
+    axis_lines = persona["axis_summary"].split("\n")
+    excerpt = "\n".join(random.sample(axis_lines, min(8, len(axis_lines))))
+
     prompt = STAGE0_USER_TEMPLATE.format(
-        name=user["display_name"],
-        identity=user["identity"],
-        interests="、".join(user["interests"]),
+        tagline=persona["tagline"],
+        tagline_bullets="\n".join(persona["tagline_bullets"]),
+        daily_life=persona["daily_life"],
+        interests=persona["interests"],
+        food_shopping=persona["food_shopping"],
+        axis_summary_excerpt=excerpt,
         hours=", ".join(str(h) for h in HOURS),
     )
     return call_llm_json(STAGE0_SYSTEM, prompt, temperature=1.2)
 
 
 # ============================================================
-# Posting probability
+# Posting probability (derived from axis_scores)
 # ============================================================
 
 
-def should_post(user: dict, hour: int, posts_today: int) -> bool:
-    """Decide if user posts at this hour based on persona."""
+def derive_posting_behavior(persona: dict) -> dict:
+    """Derive SNS posting behavior from axis_scores."""
+    raw = persona.get("_raw", {})
+    axis = raw.get("axis_scores", {})
+
+    # Extract relevant axes
+    def get_score(category: str, axis_id: str) -> int:
+        for ax in axis.get(category, []):
+            if ax.get("id") == axis_id:
+                return ax.get("score", 3)
+        return 3
+
+    # hobby_sharing: 1=すぐに共有, 5=一人で静かに楽しむ
+    sharing = get_score("hobby", "hobby_sharing")
+    # friend_energy: 1=まったり, 5=ハイテンション
+    energy = get_score("friendship", "friend_energy")
+    # hobby_spontaneity: 1=その場で決める, 5=先に決めておく
+    spontaneity = get_score("hobby", "hobby_spontaneity")
+    # hobby_weekend: 1=朝から予定詰める, 5=布団から出ない
+    weekend = get_score("hobby", "hobby_weekend")
+
+    # Posting frequency: sharers + energetic people post more
+    freq_score = (6 - sharing) + energy  # 2-10 range
+    if freq_score >= 7:
+        frequency = "high"
+    elif freq_score <= 4:
+        frequency = "low"
+    else:
+        frequency = "medium"
+
+    # Active hours: morning types vs night types
+    if weekend <= 2:  # Active, schedule-packed
+        active_hours = [7, 8, 9, 12, 15, 18, 21]
+    elif weekend >= 4:  # Lazy, late riser
+        active_hours = [12, 13, 15, 18, 20, 21, 22, 23]
+    else:
+        active_hours = [8, 12, 15, 18, 20, 22, 23]
+
+    return {
+        "frequency": frequency,
+        "active_hours": active_hours,
+        "sharing_tendency": sharing,
+        "energy_level": energy,
+        "spontaneity": spontaneity,
+    }
+
+
+def should_post(persona: dict, behavior: dict, hour: int, posts_today: int) -> bool:
+    """Decide if user posts at this hour."""
     base = 0.25
-    if hour in user["active_hours"]:
+    if hour in behavior["active_hours"]:
         base += 0.3
-    freq = user["post_frequency"]
+    freq = behavior["frequency"]
     if freq == "high":
         base += 0.15
     elif freq == "low":
         base -= 0.1
-    # Fatigue: reduce probability as posts accumulate
+    # Fatigue
     if posts_today >= 4:
         base -= 0.15
     if posts_today >= 6:
@@ -303,21 +350,29 @@ You are NOT generating a post. You are generating their internal state.
 Output JSON only. All text in Japanese."""
 
 STAGE1_USER_TEMPLATE = """\
-{name}は今{hour}時。
+この人は今{hour}時。
 
-【この人のSNS心理】
-投稿動機: {motivation_desc}
-他人の目をどれくらい意識するか: {audience_awareness}
-思考の深さ: {inner_depth}
-感情の振れ幅: {emotional_range}
-投稿したくなる瞬間: {post_triggers}
+【性格・人柄】
+{personality}
+
+【内面・思考パターン】
+{inner_thoughts}
+
+【人間関係の特徴】
+{relationships}
+
+【恋愛との距離】
+{romance}
+
+【性格傾向スコア（抜粋���】
+{axis_excerpt}
 
 【今日の状況】
 天気の印象: {weather_feeling}
 今日の気分: {overall_mood}
 頭の片隅にあること: {undercurrent}
 
-【この時間に起きていること】
+【この時間に起きていること���
 {current_event}
 
 【タイムライン（最近見た投稿）】
@@ -341,15 +396,13 @@ STAGE1_USER_TEMPLATE = """\
 
 def generate_internal_state(
     user_id: str,
-    user: dict,
+    persona: dict,
     hour: int,
     day_ctx: dict,
     recent_posts: list[dict],
     already_posted: list[str],
 ) -> dict:
-    """Stage 1: Generate internal state."""
-    psych = user["posting_psychology"]
-
+    """Stage 1: Generate internal state from preference_analysis persona."""
     # Find event for this hour
     current_event = "特になし"
     for ev in day_ctx.get("events", []):
@@ -358,7 +411,7 @@ def generate_internal_state(
             break
 
     # Build timeline text
-    timeline = "（まだ誰も投稿していない）"
+    timeline = "（まだ誰も投稿し���いない）"
     if recent_posts:
         lines = [f"  [{p['time']}] {p['user']}: {p['text']}" for p in recent_posts[-8:]]
         timeline = "\n".join(lines)
@@ -368,14 +421,17 @@ def generate_internal_state(
     if already_posted:
         posted_text = "\n".join(f"  - {t}" for t in already_posted)
 
+    # Random axis excerpt for variety
+    axis_lines = persona["axis_summary"].split("\n")
+    axis_excerpt = "\n".join(random.sample(axis_lines, min(6, len(axis_lines))))
+
     prompt = STAGE1_USER_TEMPLATE.format(
-        name=user["display_name"],
         hour=hour,
-        motivation_desc=psych["motivation_desc"],
-        audience_awareness=psych["audience_awareness"],
-        inner_depth=psych["inner_depth"],
-        emotional_range=psych["emotional_range"],
-        post_triggers="、".join(psych["post_triggers"]),
+        personality=persona["personality"][:800],
+        inner_thoughts=persona["inner_thoughts"][:600],
+        relationships=persona["relationships"][:400],
+        romance=persona["romance"][:300],
+        axis_excerpt=axis_excerpt,
         weather_feeling=day_ctx.get("weather_feeling", "普通"),
         overall_mood=day_ctx.get("overall_mood", "普通"),
         undercurrent=day_ctx.get("undercurrent", "特になし"),
@@ -396,13 +452,14 @@ You write a single SNS post as a specific person.
 Output ONLY the post text. No explanation, no quotes around it."""
 
 STAGE2_USER_TEMPLATE = """\
-{name}としてSNS投稿を1つ書いてください。
+この人としてSNS投稿を1つ書いてください。
 
-【文体】
-{tone}
+【この人のキャッチコピー】
+{tagline}
+{tagline_bullets}
 
-【参考: この人の過去の投稿例（コピーするな。雰囲気だけ参考に）】
-{example_posts}
+【性格・人柄（文体の参考に）】
+{personality_excerpt}
 
 【今の内面状態】
 状況: {situation}
@@ -411,13 +468,14 @@ STAGE2_USER_TEMPLATE = """\
 投稿の意図: {posting_intent}
 
 ルール:
-- 内面の全てを書く必要はない。SNSに載せる部分だけ自然に
+- この人の性格・人柄に合った自然な文体で書く
+- 内面の全てを書く必要はない。SNSに載せる部分だけ
 - 投稿の意図に合った書き方にする
   - 記録 → 淡々と事実。飾らない
   - 共感 → 「わかる」を引き出す感じ
   - 交流 → @メンションや問いかけ（タイムラインに相手の投稿がある場合のみ）
   - 表現 → 詩的、文学的、比喩
-  - 発散 → 感情をそのまま出す
+  - 発�� → 感情をそのまま出す
 - 最大100文字程度
 - ハッシュタグは使わない
 - 投稿内容のみ出力"""
@@ -425,21 +483,20 @@ STAGE2_USER_TEMPLATE = """\
 
 def generate_post(
     user_id: str,
-    user: dict,
+    persona: dict,
     internal_state: dict,
 ) -> str:
-    """Stage 2: Generate post from internal state."""
+    """Stage 2: Generate post from internal state + persona."""
     prompt = STAGE2_USER_TEMPLATE.format(
-        name=user["display_name"],
-        tone=user["tone"],
-        example_posts="\n".join(f"  - {p}" for p in user["example_posts"]),
+        tagline=persona["tagline"],
+        tagline_bullets="\n".join(persona["tagline_bullets"][:2]),
+        personality_excerpt=persona["personality"][:400],
         situation=internal_state.get("situation", ""),
         raw_thought=internal_state.get("raw_thought", ""),
         emotion=internal_state.get("emotion", ""),
         posting_intent=internal_state.get("posting_intent", ""),
     )
     text = call_llm(STAGE2_SYSTEM, prompt, temperature=0.9, max_tokens=200)
-    # Clean up: remove surrounding quotes if present
     return text.strip().strip('"').strip("「」")
 
 
@@ -465,9 +522,12 @@ def print_post(post: dict) -> None:
 
 def print_stage1_debug(user_id: str, hour: int, state: dict) -> None:
     """Print internal state for debugging (dimmed)."""
-    print(f"  \033[2m[{hour:02d}h] {user_id} inner: {state.get('raw_thought', '?')[:60]}"
-          f" → {state.get('posting_intent', '?')}"
-          f" (post={state.get('wants_to_post', '?')})\033[0m")
+    print(
+        f"  \033[2m[{hour:02d}h] {user_id} inner: "
+        f"{state.get('raw_thought', '?')[:60]}"
+        f" → {state.get('posting_intent', '?')}"
+        f" (post={state.get('wants_to_post', '?')})\033[0m"
+    )
 
 
 # ============================================================
@@ -484,12 +544,25 @@ def main():
     today = datetime.now().strftime("%Y-%m-%d")
     print_header(today)
 
+    # --- Layer 1: Load personas from preference_analysis ---
+    print("  \033[2mLoading personas from preference_analysis data...\033[0m")
+    personas = load_personas()
+    print()
+
+    # Derive posting behaviors from axis_scores
+    behaviors = {uid: derive_posting_behavior(p) for uid, p in personas.items()}
+    if debug:
+        for uid, b in behaviors.items():
+            print(f"  \033[2m  {uid}: freq={b['frequency']}, "
+                  f"active={b['active_hours']}\033[0m")
+        print()
+
     # --- Stage 0: Generate day contexts ---
     print("  \033[2mGenerating day contexts...\033[0m")
     day_contexts: dict[str, dict] = {}
-    for uid, user in USERS.items():
+    for uid, persona in personas.items():
         try:
-            ctx = generate_day_context(uid, user)
+            ctx = generate_day_context(uid, persona)
             day_contexts[uid] = ctx
             print(f"  \033[2m  {uid}: {ctx.get('overall_mood', '?')}\033[0m")
         except Exception as e:
@@ -506,24 +579,27 @@ def main():
 
     # --- Main loop: simulate the day ---
     all_posts: list[dict] = []
-    user_post_history: dict[str, list[str]] = {uid: [] for uid in USERS}
+    user_post_history: dict[str, list[str]] = {uid: [] for uid in personas}
     skipped = 0
 
     for hour in HOURS:
-        user_ids = list(USERS.keys())
+        user_ids = list(personas.keys())
         random.shuffle(user_ids)
 
         for uid in user_ids:
-            user = USERS[uid]
+            persona = personas[uid]
+            behavior = behaviors[uid]
 
             # Probability check
-            if not should_post(user, hour, len(user_post_history[uid])):
+            if not should_post(persona, behavior, hour, len(user_post_history[uid])):
                 continue
 
             # Stage 1: Internal state
             try:
                 state = generate_internal_state(
-                    uid, user, hour,
+                    uid,
+                    persona,
+                    hour,
                     day_contexts[uid],
                     all_posts,
                     user_post_history[uid],
@@ -543,7 +619,7 @@ def main():
 
             # Stage 2: Generate post
             try:
-                text = generate_post(uid, user, state)
+                text = generate_post(uid, persona, state)
             except Exception as e:
                 if debug:
                     print(f"  \033[31m[{hour:02d}h] {uid} Stage 2 error: {e}\033[0m")
@@ -551,7 +627,7 @@ def main():
 
             time_str = f"{hour:02d}:{random.randint(0, 59):02d}"
             post = {
-                "user": user["display_name"],
+                "user": persona["display_name"],
                 "time": time_str,
                 "text": text,
                 "internal_state": state,
@@ -565,9 +641,10 @@ def main():
     # --- Summary ---
     print(f"{'─' * 52}")
     print(f"  Total posts: {len(all_posts)}  (skipped: {skipped})")
-    for uid in USERS:
+    for uid in personas:
         count = len(user_post_history[uid])
-        print(f"    {uid}: {count} posts")
+        tagline = personas[uid]["tagline"]
+        print(f"    {uid} ({tagline}): {count} posts")
     print(f"{'─' * 52}")
 
     # --- Save results to JSON ---
@@ -576,14 +653,18 @@ def main():
     output = {
         "date": today,
         "model": MODEL,
-        "users": {uid: {
-            "display_name": u["display_name"],
-            "identity": u["identity"],
-            "interests": u["interests"],
-            "tone": u["tone"],
-            "posting_psychology": u["posting_psychology"],
-            "example_posts": u["example_posts"],
-        } for uid, u in USERS.items()},
+        "users": {
+            uid: {
+                "display_name": p["display_name"],
+                "tagline": p["tagline"],
+                "tagline_bullets": p["tagline_bullets"],
+                "personality": p["personality"][:500],
+                "interests": p["interests"],
+                "daily_life": p["daily_life"],
+                "inner_thoughts": p["inner_thoughts"],
+            }
+            for uid, p in personas.items()
+        },
         "day_contexts": day_contexts,
         "posts": all_posts,
     }

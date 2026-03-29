@@ -36,7 +36,7 @@ API_KEY = os.getenv("OPEN_ROUTER_API_KEY")
 MODEL = "google/gemini-2.5-flash"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 HOURS = [7, 8, 9, 12, 13, 15, 18, 19, 20, 21, 22, 23]
-DISPLAY_NAMES = ["wataru", "shuuu", "mio", "takkun"]
+DISPLAY_NAMES = ["cochan16", "mio", "riku", "shuuuu2", "wataru"]
 
 ANGLE_HINTS = [
     "五感に注目（見えてるもの、聞こえてる音、匂い）",
@@ -203,11 +203,12 @@ def load_personas() -> dict[str, dict]:
         sys.exit(1)
 
     personas = {}
-    for i, fpath in enumerate(files[: len(DISPLAY_NAMES)]):
+    for fpath in files:
         with open(fpath, encoding="utf-8") as f:
             sc = json.load(f)
 
-        name = DISPLAY_NAMES[i]
+        # Derive name from filename: user_riku.json → riku
+        name = fpath.stem.removeprefix("user_")
         sections = sc.get("sections", [])
         axis = sc.get("axis_scores", {})
 

@@ -592,16 +592,13 @@
 <script>
 const USER_COLORS = {
   wataru: '#4A90D9',
-  shuuu: '#E8A838',
+  shuuuu2: '#E8A838',
+  hana: '#E05A80',
+  furukaho: '#9B6B9E',
+  iii: '#5BAF6F',
+  cochan16: '#E8A838',
   mio: '#9B6B9E',
-  takkun: '#E05A47',
-};
-
-const USER_INITIALS = {
-  wataru: 'W',
-  shuuu: 'S',
-  mio: 'M',
-  takkun: 'T',
+  riku: '#E05A47',
 };
 
 let data = null;
@@ -612,7 +609,28 @@ function getColor(username) {
 }
 
 function getInitial(username) {
-  return USER_INITIALS[username] || username.charAt(0).toUpperCase();
+  return username.charAt(0).toUpperCase();
+}
+
+function getAvatarUrl(username) {
+  if (!data || !data.users) return null;
+  // Find by display_name or uid
+  for (const [uid, user] of Object.entries(data.users)) {
+    if (uid === username || user.display_name === username) {
+      return user.avatar_url || null;
+    }
+  }
+  return null;
+}
+
+function renderAvatar(username, size) {
+  const url = getAvatarUrl(username);
+  const color = getColor(username);
+  const sz = size || 44;
+  if (url) {
+    return `<img src="${url}" alt="${username}" style="width:${sz}px;height:${sz}px;border-radius:50%;object-fit:cover;flex-shrink:0;">`;
+  }
+  return `<div class="avatar" style="background:${color};width:${sz}px;height:${sz}px;font-size:${Math.round(sz*0.36)}px">${getInitial(username)}</div>`;
 }
 
 // ===== Render Profiles Bar =====
@@ -638,10 +656,10 @@ function renderProfiles() {
     };
 
     chip.innerHTML = `
-      <div class="avatar" style="background:${getColor(uid)}">${getInitial(uid)}</div>
+      ${renderAvatar(uid, 36)}
       <div class="info">
         <div class="name" style="color:${getColor(uid)}">${user.display_name}</div>
-        <div class="identity">${user.identity}</div>
+        <div class="identity">${user.tagline || ''}</div>
       </div>
     `;
 
@@ -675,7 +693,7 @@ function renderDayContext() {
 
     card.innerHTML = `
       <div class="card-header">
-        <div class="mini-avatar" style="background:${getColor(uid)}">${getInitial(uid)}</div>
+        ${renderAvatar(uid, 24)}
         <div class="card-name" style="color:${getColor(uid)}">${user.display_name}</div>
       </div>
       <div class="ctx-item">
@@ -701,8 +719,10 @@ function renderTimeline() {
   const container = document.getElementById('timeline');
   container.innerHTML = '';
 
-  // Sort by time
-  const sorted = [...data.posts].sort((a, b) => a.time.localeCompare(b.time));
+  // Sort by time, keep original index for reply lookups
+  const sorted = data.posts.map((p, idx) => ({...p, _origIdx: idx}))
+    .sort((a, b) => a.time.localeCompare(b.time));
+  const sorted_with_idx = sorted;
 
   sorted.forEach((post, i) => {
     const el = document.createElement('div');
@@ -711,19 +731,34 @@ function renderTimeline() {
     el.style.animationDelay = `${i * 0.04}s`;
 
     const color = getColor(post.user);
-    const initial = getInitial(post.user);
     const state = post.internal_state || {};
     const postId = `inner-${i}`;
 
+    // Build reply context if this is a reply
+    let replyHtml = '';
+    if (post.reply_to_idx != null) {
+      const origPost = data.posts[post.reply_to_idx];
+      if (origPost) {
+        replyHtml = `
+          <div style="margin-left:56px;margin-bottom:8px;padding:8px 12px;background:var(--bg-secondary);border-left:3px solid ${getColor(origPost.user)};border-radius:0 8px 8px 0;font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+            ${renderAvatar(origPost.user, 18)}
+            <span style="color:${getColor(origPost.user)};font-weight:600;">${origPost.user}</span>
+            <span>${escapeHtml(origPost.text).substring(0, 50)}${origPost.text.length > 50 ? '…' : ''}</span>
+          </div>
+        `;
+      }
+    }
+
     el.innerHTML = `
       <div class="post-header">
-        <div class="avatar" style="background:${color}">${initial}</div>
+        ${renderAvatar(post.user, 44)}
         <div class="post-meta">
           <span class="username" style="color:${color}">${post.user}</span>
           <span class="time">${post.time}</span>
           ${state.posting_intent ? `<br><span class="motivation-tag">${state.posting_intent}</span>` : ''}
         </div>
       </div>
+      ${replyHtml}
       <div class="post-text">${escapeHtml(post.text)}</div>
       ${state.raw_thought ? `
         <button class="inner-state-btn" onclick="toggleInnerState('${postId}', this)">

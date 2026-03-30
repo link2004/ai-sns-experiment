@@ -38,6 +38,16 @@ API_URL = "https://openrouter.ai/api/v1/chat/completions"
 HOURS = [7, 8, 9, 12, 13, 15, 18, 19, 20, 21, 22, 23]
 DISPLAY_NAMES = ["wataru", "shuuuu2", "hana", "furukaho", "iii", "cochan16", "riku"]
 
+CHARACTER_URLS = {
+    "cochan16": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/b7586fe2-659a-4cef-bb2d-8719ca38a77d/20260214_045427.png",
+    "furukaho": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/07c681c2-3310-45bf-8930-dc087eac462c/20260328_035200.png",
+    "hana": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/79cc4cdc-d60f-49ea-a738-d0b0ec6abc2c/20260210_102057.png",
+    "iii": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/74141642-884d-4169-89ad-d202d1560a19/20260324_185617.png",
+    "riku": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/211a7e63-b135-4595-8d28-cb8689cb6617/20260219_063036.png",
+    "shuuuu2": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/f9964ff4-7efc-4495-a4e1-af311754dfa8/20260310_214902.png",
+    "wataru": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/310d8ad9-e71a-4552-acf5-860332e691d5/20260208_015142.png",
+}
+
 ANGLE_HINTS = [
     "五感に注目（見えてるもの、聞こえてる音、匂い）",
     "ふと昔のことを思い出す",
@@ -463,7 +473,8 @@ JSON出力:
   "situation": "今の状況（場所、していること）1文",
   "raw_thought": "投稿前の生の思考。上のトピックに関連させること。1〜2文",
   "emotion": "具体的な感情（1語ではなく状況込みで）",
-  "posting_intent": "記録/共感/交流/表現/発散/特になし"
+  "posting_intent": "記録/共感/交流/表現/発散/特になし",
+  "reply_to_user": "タイムラインの誰かの投稿に反応する場合、そのユーザー名。反応しない場合はnull"
 }}"""
 
 
@@ -747,6 +758,16 @@ def main():
                     print(f"  \033[31m[{hour:02d}h] {uid} Stage 2 error: {e}\033[0m")
                 continue
 
+            # Find reply target if LLM indicated one
+            reply_to_user = state.get("reply_to_user")
+            reply_to_idx = None
+            if reply_to_user:
+                # Find the latest post by that user
+                for idx in range(len(all_posts) - 1, -1, -1):
+                    if all_posts[idx]["user"] == reply_to_user:
+                        reply_to_idx = idx
+                        break
+
             # Track
             used_topics[uid].update(selected_topics)
             time_str = f"{hour:02d}:{random.randint(0, 59):02d}"
@@ -755,6 +776,7 @@ def main():
                 "time": time_str,
                 "text": text,
                 "internal_state": state,
+                "reply_to_idx": reply_to_idx,
             }
             all_posts.append(post)
             user_post_history[uid].append(text)
@@ -819,6 +841,7 @@ def main():
                 "style_profile": p["style_profile"],
                 "topic_pool": p["topic_pool"][:10],
                 "behavior": p["behavior"],
+                "avatar_url": CHARACTER_URLS.get(uid),
             }
             for uid, p in personas.items()
         },

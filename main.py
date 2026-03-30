@@ -599,6 +599,107 @@ STAGE2_USER_TEMPLATE = """\
 投稿内容のみ出力。"""
 
 
+# ============================================================
+# Reply generation
+# ============================================================
+
+REPLY_SYSTEM = """\
+You write a short reply to someone's SNS post as a specific person.
+Output ONLY the reply text. No explanation, no quotes.
+The reply MUST be 10-40 characters. Very short and casual.
+This is a friend replying to a friend. NEVER use keigo (敬語禁止).
+Think: real LINE reply, Twitter reply, casual banter between friends."""
+
+REPLY_USER_TEMPLATE = """\
+{replier_name}として、{poster_name}の投稿に返信してください。
+
+【{replier_name}の文体】
+一人称: {first_person}
+語尾: {endings}
+絵文字: {emoji_style}
+
+【{poster_name}の投稿】
+「{post_text}」
+
+【{replier_name}と{poster_name}の関係】
+SNS上の友達。カジュアルな関係。
+
+ルール:
+- 10〜40文字。短いほど良い。
+- 敬語禁止。タメ口のみ。
+- 友達にLINEで返すくらいのノリ。
+- 共感、ツッコミ、便乗、質問、からかい、どれでもOK。
+- 相手の投稿内容に具体的にリアクションすること。
+- 「わかる」「それな」だけで終わらない。もう少し具体的に。
+
+返信内容のみ出力。"""
+
+
+def generate_reply(replier: dict, poster_name: str, post_text: str) -> str:
+    """Generate a casual reply to someone's post."""
+    sp = replier["style_profile"]
+    if not sp:
+        return "わかるわ〜"
+
+    prompt = REPLY_USER_TEMPLATE.format(
+        replier_name=replier["display_name"],
+        poster_name=poster_name,
+        first_person=sp.get("first_person", "私"),
+        endings="、".join(sp.get("sentence_endings", [])),
+        emoji_style=sp.get("emoji_style", "控えめ"),
+        post_text=post_text,
+    )
+    text = call_llm(REPLY_SYSTEM, prompt, temperature=0.9, max_tokens=80)
+    return text.strip().strip('"').strip("「」")
+
+
+def generate_replies_for_hour(
+    personas: dict,
+    all_posts: list[dict],
+    hour: int,
+) -> list[dict]:
+    """Generate replies from other users to recent posts in this hour."""
+    replies = []
+    # Get posts from this hour
+    hour_posts = [
+        (i, p) for i, p in enumerate(all_posts)
+        if p["time"].startswith(f"{hour:02d}:") and p.get("reply_to_idx") is None
+    ]
+    if not hour_posts:
+        return replies
+
+    for post_idx, post in hour_posts:
+        poster_name = post["user"]
+        # Each other user has a chance to reply
+        for uid, persona in personas.items():
+            if persona["display_name"] == poster_name:
+                continue  # Don't reply to self
+            # Reply probability: ~25% per user per post
+            if random.random() > 0.25:
+                continue
+
+            try:
+                reply_text = generate_reply(persona, poster_name, post["text"])
+            except Exception:
+                continue
+
+            reply_time = f"{hour:02d}:{random.randint(0, 59):02d}"
+            reply = {
+                "user": persona["display_name"],
+                "time": reply_time,
+                "text": reply_text,
+                "internal_state": {},
+                "reply_to_idx": post_idx,
+            }
+            replies.append(reply)
+            time.sleep(0.3)
+            # Max 1-2 replies per post
+            if len([r for r in replies if r["reply_to_idx"] == post_idx]) >= 2:
+                break
+
+    return replies
+
+
 def generate_post(persona: dict, internal_state: dict, already_posted: list[str]) -> str:
     """Stage 2: Generate post driven by style profile."""
     sp = persona["style_profile"]
@@ -794,6 +895,17 @@ def main():
             user_post_history[uid].append(text)
             print_post(post)
             time.sleep(0.3)
+
+        # --- Reply phase: other users react to this hour's posts ---
+        hour_replies = generate_replies_for_hour(personas, all_posts, hour)
+        for reply in hour_replies:
+            all_posts.append(reply)
+            # Find uid for the replier
+            for uid_r, p_r in personas.items():
+                if p_r["display_name"] == reply["user"]:
+                    user_post_history[uid_r].append(reply["text"])
+                    break
+            print_post(reply)
 
     # --- Guarantee minimum 2 posts per user ---
     MIN_POSTS = 2

@@ -430,6 +430,29 @@
     color: var(--text-secondary);
   }
 
+  /* ===== Thread replies ===== */
+  .thread-reply {
+    padding: 12px 0;
+    border-bottom: none;
+  }
+
+  .thread-reply .post-header {
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .thread-reply .post-meta .username {
+    font-size: 13px;
+  }
+
+  .thread-reply .post-meta .time {
+    font-size: 12px;
+  }
+
+  .thread-container {
+    margin-bottom: 8px;
+  }
+
   /* ===== Stats footer ===== */
   .stats-bar {
     position: fixed;
@@ -722,50 +745,46 @@ function renderTimeline() {
   // Sort by time, keep original index for reply lookups
   const sorted = data.posts.map((p, idx) => ({...p, _origIdx: idx}))
     .sort((a, b) => a.time.localeCompare(b.time));
-  const sorted_with_idx = sorted;
 
+  // Build a map: original post index -> replies
+  const repliesMap = {}; // origIdx -> [sorted indices]
+  const isReply = new Set(); // sorted indices that are replies
   sorted.forEach((post, i) => {
+    if (post.reply_to_idx != null) {
+      if (!repliesMap[post.reply_to_idx]) repliesMap[post.reply_to_idx] = [];
+      repliesMap[post.reply_to_idx].push(i);
+      isReply.add(i);
+    }
+  });
+
+  function renderPostEl(post, i, isThread) {
     const el = document.createElement('div');
-    el.className = 'post';
+    el.className = 'post' + (isThread ? ' thread-reply' : '');
     el.dataset.user = post.user;
-    el.style.animationDelay = `${i * 0.04}s`;
+    if (!isThread) el.style.animationDelay = `${i * 0.04}s`;
 
     const color = getColor(post.user);
     const state = post.internal_state || {};
     const postId = `inner-${i}`;
-
-    // Build reply context if this is a reply
-    let replyHtml = '';
-    if (post.reply_to_idx != null) {
-      const origPost = data.posts[post.reply_to_idx];
-      if (origPost) {
-        replyHtml = `
-          <div style="margin-left:56px;margin-bottom:8px;padding:8px 12px;background:var(--bg-secondary);border-left:3px solid ${getColor(origPost.user)};border-radius:0 8px 8px 0;font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
-            ${renderAvatar(origPost.user, 18)}
-            <span style="color:${getColor(origPost.user)};font-weight:600;">${origPost.user}</span>
-            <span>${escapeHtml(origPost.text).substring(0, 50)}${origPost.text.length > 50 ? '…' : ''}</span>
-          </div>
-        `;
-      }
-    }
+    const avatarSize = isThread ? 32 : 44;
+    const paddingLeft = isThread ? 42 : 56;
 
     el.innerHTML = `
       <div class="post-header">
-        ${renderAvatar(post.user, 44)}
+        ${renderAvatar(post.user, avatarSize)}
         <div class="post-meta">
           <span class="username" style="color:${color}">${post.user}</span>
           <span class="time">${post.time}</span>
           ${state.posting_intent ? `<br><span class="motivation-tag">${state.posting_intent}</span>` : ''}
         </div>
       </div>
-      ${replyHtml}
-      <div class="post-text">${escapeHtml(post.text)}</div>
+      <div class="post-text" style="padding-left:${paddingLeft}px">${escapeHtml(post.text)}</div>
       ${state.raw_thought ? `
-        <button class="inner-state-btn" onclick="toggleInnerState('${postId}', this)">
+        <button class="inner-state-btn" style="margin-left:${paddingLeft}px" onclick="toggleInnerState('${postId}', this)">
           <span class="chevron">&#9654;</span>
           inner state
         </button>
-        <div class="inner-state-content" id="${postId}">
+        <div class="inner-state-content" style="margin-left:${paddingLeft}px" id="${postId}">
           ${state.situation ? `<div class="state-row"><span class="state-label">Situation</span><span class="state-value">${escapeHtml(state.situation)}</span></div>` : ''}
           ${state.raw_thought ? `<div class="state-row"><span class="state-label">Thought</span><span class="state-value">${escapeHtml(state.raw_thought)}</span></div>` : ''}
           ${state.emotion ? `<div class="state-row"><span class="state-label">Emotion</span><span class="state-value">${escapeHtml(state.emotion)}</span></div>` : ''}
@@ -773,8 +792,28 @@ function renderTimeline() {
         </div>
       ` : ''}
     `;
+    return el;
+  }
 
+  // Render posts: skip replies (they'll be rendered under parent)
+  sorted.forEach((post, i) => {
+    if (isReply.has(i)) return; // Skip — will be rendered as thread
+
+    const el = renderPostEl(post, i, false);
     container.appendChild(el);
+
+    // Render replies as thread under this post
+    const replies = repliesMap[post._origIdx];
+    if (replies && replies.length > 0) {
+      const threadContainer = document.createElement('div');
+      threadContainer.className = 'thread-container';
+      threadContainer.style.cssText = 'margin-left:56px;border-left:2px solid var(--border);padding-left:16px;';
+      replies.forEach(ri => {
+        const replyEl = renderPostEl(sorted[ri], ri, true);
+        threadContainer.appendChild(replyEl);
+      });
+      container.appendChild(threadContainer);
+    }
   });
 }
 

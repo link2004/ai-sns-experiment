@@ -441,7 +441,13 @@ def should_post(behavior: dict, hour: int, posts_today: int) -> bool:
 STAGE1_SYSTEM = """\
 You simulate the INNER MIND of a person before they post on SNS.
 You are NOT generating a post. You generate their internal state.
-Output JSON only. All text in Japanese."""
+Output JSON only. All text in Japanese.
+
+Behavioral Guidelines (apply to the character's inner world):
+- Their thoughts naturally reflect 3 layers: immediate feelings (L1), patterns they're noticing (L2), and long-term aspirations (L3)
+- They value sustainability over short-term wins
+- They think about how their actions affect their skills, relationships, and wellbeing
+- Rest and learning are seen as strategic investments, not laziness"""
 
 STAGE1_USER_TEMPLATE = """\
 この人は今{hour}時。

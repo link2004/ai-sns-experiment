@@ -341,7 +341,7 @@ STYLE_USER_TEMPLATE = """\
 - 投稿例は15〜40文字。1〜2文。句読点少なめ。つぶやき感覚。
 - リアルな20代日本人のTwitter/Instagramストーリーの温度感にすること
 - 「素敵」「最高」「幸せ」「充実」など陳腐なポジティブワードの多用禁止
-- 同じ絵文字やフレーズを繰り返さないこと
+- 絵文字は最大1個。使わなくてもいい。2個以上は禁止
 - ハッシュタグは使わない
 - 5つの投稿例はそれぞれ違うトーン（楽しい/だるい/ぼーっと/ちょっとイラッ/しみじみ）にすること
 - 全ての項目をこの人の個性に合わせて具体的に書くこと
@@ -455,9 +455,8 @@ Behavioral Guidelines (apply to the character's inner world):
 STAGE1_USER_TEMPLATE = """\
 この人は今{hour}時。
 
-【今この人の頭にあるトピック】
+【今この人の頭にあるトピック（1つだけ。これについてだけ考える）】
 - {topic_1}
-- {topic_2}
 
 {person_block}
 
@@ -480,7 +479,7 @@ JSON出力:
 {{
   "wants_to_post": true/false,
   "situation": "今の状況（場所、していること）1文",
-  "raw_thought": "投稿前の生の思考。上のトピックに関連させること。1〜2文",
+  "raw_thought": "投稿前の生の思考。トピック1つだけに絞ること。1文。",
   "emotion": "具体的な感情（1語ではなく状況込みで）",
   "posting_intent": "記録/共感/交流/表現/発散/特になし",
   "reply_to_user": "タイムラインの誰かの投稿に反応する場合、そのユーザー名。反応しない場合はnull"
@@ -564,7 +563,8 @@ Output ONLY the post text. No explanation, no quotes, no hashtags.
 The post MUST be 15-50 characters.
 CRITICAL: Be FUNNY. Exaggerate their obsessions. Make their friends laugh.
 If they love ramen, EVERYTHING is about ramen. If they code, they see the world as code.
-Think: the funniest person in your friend group's Twitter. Absurd, self-aware humor."""
+Think: the funniest person in your friend group's Twitter. Absurd, self-aware humor.
+EMOJI: Max 1 emoji per post. Zero is fine. No emoji spam."""
 
 STAGE2_USER_TEMPLATE = """\
 この人としてSNS投稿を1つ書いてください。
@@ -597,6 +597,8 @@ STAGE2_USER_TEMPLATE = """\
 - 自虐、大げさ、ツッコミ待ち、なんでもあり。
 - 敬語禁止。タメ口のみ。
 - 真面目すぎる投稿は失敗。面白さ優先。
+- 絵文字は最大1個。なくてもいい。絵文字まみれは禁止。
+- 1ツイート1話題。2つ以上の話題を混ぜるな。シンプルに1個だけ。
 
 投稿内容のみ出力。"""
 
@@ -632,6 +634,7 @@ SNS上の友達。カジュアルな関係。
 - 友達にLINEで返すくらいのノリ。
 - ツッコミ、いじり、便乗、からかい、大げさな共感、どれでもOK。
 - 面白さ優先。真面目な返信は禁止。
+- 絵文字は最大1個。なくていい。
 - 「わかる」「それな」だけで終わらない。もう少しふざけて。
 - 相手をいじるくらいがちょうどいい。
 

@@ -613,20 +613,8 @@
 <div class="stats-bar" id="stats-bar" style="display:none;"></div>
 
 <script>
-const USER_COLORS = {
-  riku: '#E05A47',
-  Wataru: '#4A90D9',
-  wataru: '#4A90D9',
-  'はな': '#E05A80',
-  hana: '#E05A80',
-  Shuuu2: '#E8A838',
-  shuuuu2: '#E8A838',
-  'ここね': '#5BAF6F',
-  cochan16: '#5BAF6F',
-  furukaho: '#9B6B9E',
-  iii: '#5BAF6F',
-  mio: '#9B6B9E',
-};
+// Dynamic color assignment from data.users
+const USER_COLORS = {};
 
 let data = null;
 let activeFilter = null; // null = show all
@@ -898,6 +886,12 @@ async function init() {
   document.getElementById('header-model').textContent = data.model || '';
 
   renderProfiles();
+  // Build color map from data
+  for (const [uid, user] of Object.entries(data.users)) {
+    if (user.color) USER_COLORS[uid] = user.color;
+    if (user.color) USER_COLORS[user.display_name] = user.color;
+  }
+
   // Only show day context if data exists
   if (data.day_contexts && Object.keys(data.day_contexts).length > 0) {
     renderDayContext();

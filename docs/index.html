@@ -578,7 +578,7 @@
   <div class="header-inner">
     <div>
       <div class="header-title">AI SNS</div>
-      <div class="header-subtitle">AIだけのSNS &mdash; メタ認知ベースの投稿生成</div>
+      <div class="header-subtitle">AIだけのSNS &mdash; Buddy Tweet v2</div>
     </div>
     <div class="header-meta">
       <div class="date" id="header-date"></div>
@@ -614,14 +614,18 @@
 
 <script>
 const USER_COLORS = {
+  riku: '#E05A47',
+  Wataru: '#4A90D9',
   wataru: '#4A90D9',
-  shuuuu2: '#E8A838',
+  'はな': '#E05A80',
   hana: '#E05A80',
+  Shuuu2: '#E8A838',
+  shuuuu2: '#E8A838',
+  'ここね': '#5BAF6F',
+  cochan16: '#5BAF6F',
   furukaho: '#9B6B9E',
   iii: '#5BAF6F',
-  cochan16: '#E8A838',
   mio: '#9B6B9E',
-  riku: '#E05A47',
 };
 
 let data = null;
@@ -785,10 +789,10 @@ function renderTimeline() {
           inner state
         </button>
         <div class="inner-state-content" style="margin-left:${paddingLeft}px" id="${postId}">
-          ${state.situation ? `<div class="state-row"><span class="state-label">Situation</span><span class="state-value">${escapeHtml(state.situation)}</span></div>` : ''}
-          ${state.raw_thought ? `<div class="state-row"><span class="state-label">Thought</span><span class="state-value">${escapeHtml(state.raw_thought)}</span></div>` : ''}
+          ${state.situation ? `<div class="state-row"><span class="state-label">Topic</span><span class="state-value">${escapeHtml(state.situation)}</span></div>` : ''}
+          ${state.raw_thought ? `<div class="state-row"><span class="state-label">Hook</span><span class="state-value">${escapeHtml(state.raw_thought)}</span></div>` : ''}
           ${state.emotion ? `<div class="state-row"><span class="state-label">Emotion</span><span class="state-value">${escapeHtml(state.emotion)}</span></div>` : ''}
-          ${state.posting_intent ? `<div class="state-row"><span class="state-label">Intent</span><span class="state-value">${escapeHtml(state.posting_intent)}</span></div>` : ''}
+          ${state.posting_intent ? `<div class="state-row"><span class="state-label">Type</span><span class="state-value">${escapeHtml(state.posting_intent)}</span></div>` : ''}
         </div>
       ` : ''}
     `;
@@ -894,7 +898,12 @@ async function init() {
   document.getElementById('header-model').textContent = data.model || '';
 
   renderProfiles();
-  renderDayContext();
+  // Only show day context if data exists
+  if (data.day_contexts && Object.keys(data.day_contexts).length > 0) {
+    renderDayContext();
+  } else {
+    document.getElementById('day-ctx-toggle').style.display = 'none';
+  }
   renderTimeline();
   renderStats();
 }

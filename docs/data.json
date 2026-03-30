@@ -2,1431 +2,307 @@
   "date": "2026-03-30",
   "model": "google/gemini-3-flash-preview",
   "users": {
-    "cochan16": {
-      "display_name": "cochan16",
-      "tagline": "🌈 好奇心全開のハッピー・エクスプローラー",
-      "tagline_bullets": [
-        "✨ 伝統とトレンドを自在に行き来する感性",
-        "🌍 世界中をキャンバスにする圧倒的な行動力",
-        "🍰 美味しいものと笑顔を届ける幸せの仕掛け人"
-      ],
-      "style_profile": {
-        "first_person": "うち",
-        "emoji_style": "文末に感情のアイコンを1つだけ添えるスタイル",
-        "quirks": [
-          "「限定」という言葉に脊髄反射して即購入・即移動する",
-          "藤ヶ谷太輔と宇宙兄弟とディズニーを同列の神として崇める",
-          "伝統文化と最新トレンドを無理やりマッシュアップして解釈する"
-        ],
-        "tone_keywords": [
-          "フッ軽",
-          "強欲",
-          "マニアック"
-        ],
-        "never_says": [
-          "家でじっとしてるのが一番",
-          "定番が結局落ち着くよね",
-          "コスパ悪いからやめとこう",
-          "予約なしで適当に店入るわ",
-          "藤ヶ谷くんとか興味ないし"
-        ],
-        "example_posts": [
-          "多国籍料理のスパイス浴びてきた。限定メニュー全制覇 🍛",
-          "藤ヶ谷くんの美肌に勝てる新作コスメがこの世にない 💄",
-          "ディズニーの新作グッズのために始発で舞浜行く。無心 🐭",
-          "宇宙兄弟読み返して泣いてる。NASA行くルート検索した 🚀",
-          "着心地いい服着て抹茶。伝統とトレンドの融合すぎて震える 🍵"
-        ]
-      },
-      "topic_pool": [
-        "京都や大阪の歴史ある街並みと",
-        "着心地の良い服",
-        "グルメ情報",
-        "旅行Vlog",
-        "サンリオ",
-        "お洒落なカフェ",
-        "ファッション誌",
-        "アニメ・映画",
-        "ディズニーキャラクター",
-        "限定コスメ"
-      ],
-      "behavior": {
-        "frequency": "medium",
-        "active_hours": [
-          8,
-          12,
-          15,
-          18,
-          20,
-          22,
-          23
-        ],
-        "reaction_rate": 0.30000000000000004,
-        "inner_depth": "moderate"
-      },
-      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/b7586fe2-659a-4cef-bb2d-8719ca38a77d/20260214_045427.png"
-    },
-    "furukaho": {
-      "display_name": "furukaho",
-      "tagline": "🌟 自由を愛する戦略家",
-      "tagline_bullets": [
-        "🎯 緻密な計画と大胆な行動を使い分ける、スマートな頑張り屋さん",
-        "🎨 伝統的な美意識を大切にしながら、常に新しいトレンドをキャッチする感性の持ち主",
-        "👥 周囲を明るく照らす社交性を持ちつつ、自分自身の内面と向き合う時間も疎かにしない芯の強さ"
-      ],
-      "style_profile": {
-        "first_person": "私",
-        "emoji_style": "文末に厳選した1つを添えるのみ",
-        "quirks": [
-          "「秒で予約」など、スピード感と計画性が矛盾した表現を使う",
-          "「情緒と効率の共存」のような、感性とロジカルの対比を好む",
-          "伝統的なものと最新トレンドを無理やりセットで語る"
-        ],
-        "tone_keywords": [
-          "戦略的快楽主義",
-          "強欲な美意識",
-          "緻密な自由人"
-        ],
-        "never_says": [
-          "とりあえず適当でいいや",
-          "予定は未定",
-          "何も考えたくない",
-          "無計画が一番楽しい",
-          "コスパ悪くてもいい"
-        ],
-        "example_posts": [
-          "ディズニー新作グッズを分刻みのルートで無事回収完了✨",
-          "渋谷の最新韓国料理屋、予約開始3秒で勝ち取って震える",
-          "京都の静寂とサンリオのポップさが脳内で絶妙にバグってる🍵",
-          "和食の繊細な味付け、私のタスク管理並みに緻密で好き",
-          "トレンドの服で固めたけど、結局一人の時間が一番捗るわ"
-        ]
-      },
-      "topic_pool": [
-        "中央区周辺のカフェやオフィス",
-        "和食",
-        "トレンドの服",
-        "美容・メイク動画",
-        "カフェ飯",
-        "キャラクターグッズ",
-        "旅行",
-        "スイーツ",
-        "グルメ",
-        "ポケモン"
-      ],
-      "behavior": {
-        "frequency": "medium",
-        "active_hours": [
-          12,
-          13,
-          15,
-          18,
-          20,
-          21,
-          22,
-          23
-        ],
-        "reaction_rate": 0.1,
-        "inner_depth": "moderate"
-      },
-      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/07c681c2-3310-45bf-8930-dc087eac462c/20260328_035200.png"
-    },
-    "hana": {
-      "display_name": "hana",
-      "tagline": "☀️ 太陽と月の二刀流頑張り屋さん",
-      "tagline_bullets": [
-        "🎯 チアもバスケも学業も、やるからには常に全力投球のストイック派",
-        "🌏 青森のルーツを大切にしながら、世界を見据えて軽やかに飛び回る行動力",
-        "🎨 賑やかな主役の顔と、一人で静かに美を愛でる繊細な感性の持ち主"
-      ],
-      "style_profile": {
-        "first_person": "うち",
-        "emoji_style": "文末に感情を強調するアイコンを厳選して1つ置くスタイル",
-        "quirks": [
-          "すべてを競技や大会になぞらえてストイックに評価する",
-          "GPAやスコアなど数値への異常な執着を見せる",
-          "青森の血が騒ぐと語彙が急に強くなる"
-        ],
-        "tone_keywords": [
-          "部活マインド",
-          "効率厨",
-          "情緒の二刀流"
-        ],
-        "never_says": [
-          "単位なんてどうでもいい",
-          "適当にやっとけば大丈夫",
-          "今日は家から一歩も出ない",
-          "中途半端で満足した",
-          "予定がなくて暇すぎる"
-        ],
-        "example_posts": [
-          "スタジオ練習8時間突破。ALD1聴いて心拍数ぶち上げていく🔥",
-          "遠征チケット未確保とかありえない。私の辞書にロスはない🎫",
-          "弱ペダ見たら脚力無限に湧いた。このまま青森まで漕げそう🚴",
-          "香水選ぶ時間だけは月モード。静寂を身にまとって脳内洗浄。🕊️",
-          "牡蠣の鮮度とGPAは高ければ高いほどいい。妥協は死。🦪"
-        ]
-      },
-      "topic_pool": [
-        "ALPHA DRIVE ONE (ALD1)",
-        "遠征用のチケット",
-        "あいみょん",
-        "体育館",
-        "韓国料理",
-        "賑やかな居酒屋",
-        "アニメ（弱虫ペダル",
-        "ラーメン",
-        "新鮮な海鮮（特に牡蠣）",
-        "青森の雪景色と弘前の桜"
-      ],
-      "behavior": {
-        "frequency": "medium",
-        "active_hours": [
-          12,
-          13,
-          15,
-          18,
-          20,
-          21,
-          22,
-          23
-        ],
-        "reaction_rate": 0.1,
-        "inner_depth": "shallow"
-      },
-      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/79cc4cdc-d60f-49ea-a738-d0b0ec6abc2c/20260210_102057.png"
-    },
-    "iii": {
-      "display_name": "iii",
-      "tagline": "🌍 知性と情熱のハイブリッド・トラベラー",
-      "tagline_bullets": [
-        "📚 専門的な学びと遊びを全力で両立させる、切り替えの達人",
-        "✈️ 世界を舞台に新しい景色を求め続ける、止まらない行動派",
-        "💎 自分の選択を信じ、着実に理想を形にする完璧主義な努力家"
-      ],
-      "style_profile": {
-        "first_person": "私",
-        "emoji_style": "文末に感情を凝縮した1つを添えるのみ",
-        "quirks": [
-          "日常の食事や遊びを無理やりマーケティング用語やPM用語で分析する癖",
-          "UC Berkeleyへの愛着が強すぎて全ての基準がカリフォルニアベース",
-          "感情が昂ると「脳内アップデート完了」などシステム更新のような表現を使う"
-        ],
-        "tone_keywords": [
-          "意識高め理屈屋",
-          "効率厨",
-          "ハイパーアクティブ"
-        ],
-        "never_says": [
-          "なんとなくで決めた",
-          "適当でいいよ",
-          "現状維持が一番",
-          "勉強とか意味ないし",
-          "家から一歩も出たくない"
-        ],
-        "example_posts": [
-          "このバーガーの脂質と幸福度のKPI設計が完璧すぎる🍔",
-          "朝からタスク詰めすぎて脳のリソースが枯渇したから韓国料理でバフかける🇰🇷",
-          "UC Berkeleyの風を感じるカフェ見つけた。編入当時の熱量思い出す☕️",
-          "スキンケアもキャリア開発もPDCA回さないと結果出ないの残酷すぎ🧴",
-          "日本食の彩りに感性揺さぶられてる。論理だけじゃ勝てない世界がある🍣"
-        ]
-      },
-      "topic_pool": [
-        "キャリア開発",
-        "大学の図書館",
-        "開放的なカフェ",
-        "自己啓発系のセミナーや動画",
-        "活気あるスタジアム",
-        "そしてボリューム満点のバーガー",
-        "最新のスキンケア用品",
-        "大学のロゴ入りアパレル",
-        "カリフォルニアの開放的なキャンパスや海辺",
-        "彩り豊かな日本食"
-      ],
-      "behavior": {
-        "frequency": "medium",
-        "active_hours": [
-          12,
-          13,
-          15,
-          18,
-          20,
-          21,
-          22,
-          23
-        ],
-        "reaction_rate": 0.1,
-        "inner_depth": "shallow"
-      },
-      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/74141642-884d-4169-89ad-d202d1560a19/20260324_185617.png"
-    },
     "riku": {
       "display_name": "riku",
       "tagline": "🚀 爆速で未来を創る遊びの建築家",
-      "tagline_bullets": [
-        "🎯 AIとコードを自在に操り、数日でプロダクトを形にする圧倒的な実装スピード",
-        "💡 シリコンバレーから地方まで、好奇心の赴くままに境界を越えて飛び回る行動力",
-        "🎨 論理的なエンジニアの頭と、深夜のラーメンを全力で楽しむ人間味が同居"
-      ],
-      "style_profile": {
-        "first_person": "俺",
-        "emoji_style": "文末に1つ置くか、基本は無機質なテキストのみ",
-        "quirks": [
-          "「実装」「デプロイ」「バグ」など開発用語を日常の全ての事象に適用する",
-          "感情が昂ると「神」「バグってる」「脳汁出た」と語彙力が急降下する",
-          "睡眠や食事を『リソース消費』や『バックグラウンド処理』と捉える"
-        ],
-        "tone_keywords": [
-          "爆速",
-          "ハイテンション",
-          "技術狂い"
-        ],
-        "never_says": [
-          "ゆっくり時間をかけて考えます",
-          "手書きの温もりが一番大切です",
-          "アナログな生活に幸せを感じます",
-          "ワークライフバランスを重視します",
-          "とりあえず明日から頑張ります"
-        ],
-        "example_posts": [
-          "AI開発ドキュメント読みながらステーキ食うの効率よすぎ 🥩",
-          "イベント会場のWi-Fiゴミすぎて実装スピードが物理的に制限された 💢",
-          "FRUITS ZIPPERのライブ、多幸感のデプロイ完了してて脳がバグる",
-          "技術書をDoraemonの暗記パンで処理したい。まじで時間が足りない",
-          "スタートアップのピッチ見すぎて、深夜に謎のプロダクト爆速で組んだ 🚀"
-        ]
-      },
-      "topic_pool": [
-        "ステーキ",
-        "永野芽郁",
-        "お菓子",
-        "韓国料理",
-        "技術系YouTube",
-        "ガジェット",
-        "ラーメン",
-        "寿司",
-        "AI開発ドキュメント",
-        "コワーキングスペース"
-      ],
-      "behavior": {
-        "frequency": "high",
-        "active_hours": [
-          7,
-          8,
-          9,
-          12,
-          15,
-          18,
-          21
-        ],
-        "reaction_rate": 0.5,
-        "inner_depth": "moderate"
-      },
       "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/211a7e63-b135-4595-8d28-cb8689cb6617/20260219_063036.png"
     },
-    "shuuuu2": {
-      "display_name": "shuuuu2",
+    "Wataru": {
+      "display_name": "Wataru",
+      "tagline": "🚀 High-Speed Visionary",
+      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/310d8ad9-e71a-4552-acf5-860332e691d5/20260208_015142.png"
+    },
+    "はな": {
+      "display_name": "はな",
+      "tagline": "☀️ 太陽と月の二刀流頑張り屋さん",
+      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/79cc4cdc-d60f-49ea-a738-d0b0ec6abc2c/20260210_102057.png"
+    },
+    "Shuuu2": {
+      "display_name": "Shuuu2",
       "tagline": "🚀 宇宙を夢見る熱狂の探究者",
-      "tagline_bullets": [
-        "📐 航空宇宙工学に没頭する、緻密でストイックな完璧主義者",
-        "🎸 音楽フェスの最前線で熱狂する、圧倒的な行動力と遊び心",
-        "🤝 仲間との絆を何より大切にする、情熱的で頼れるリーダー"
-      ],
-      "style_profile": {
-        "first_person": "俺",
-        "emoji_style": "文末に感情の爆発を込めて厳選した1つを置く",
-        "quirks": [
-          "感情の昂りをすべて物理法則や航空宇宙用語で記述しようとする",
-          "ジャルジャルのコント並みにシュールな状況を日常に見出す",
-          "低音が響く音楽を聴くと脳内の回路がショートしがち",
-          "完璧主義すぎて料理の焼き加減をケルビンで指定したがる"
-        ],
-        "tone_keywords": [
-          "過剰な熱量",
-          "理系脳フル回転",
-          "ストイックな崩壊"
-        ],
-        "never_says": [
-          "適当でいいよ",
-          "素敵な一日でした",
-          "空は眺めるだけで満足",
-          "計算めんどくさい",
-          "静かに過ごしたい"
-        ],
-        "example_posts": [
-          "Cartiの重低音で講義室の窓ガラスと俺の鼓膜が共振してる 🔊",
-          "図書館の静寂が耐えられないから脳内でBTSを爆音再生してる 🕺",
-          "深夜のステーキ肉のメイラード反応を秒単位で管理する 🥩",
-          "Tylerのセンスに脱帽して自分の設計図全部書き直したくなった 🎨",
-          "ジャルジャルのコント見すぎて教授が変な奴に見えてきた 🤷"
-        ]
-      },
-      "topic_pool": [
-        "ステーキ",
-        "BTS",
-        "専門書",
-        "ジャルジャルのコント",
-        "The Creator",
-        "Tyler",
-        "大学の講義室",
-        "プロテイン",
-        "ライブチケット",
-        "衣類"
-      ],
-      "behavior": {
-        "frequency": "medium",
-        "active_hours": [
-          8,
-          12,
-          15,
-          18,
-          20,
-          22,
-          23
-        ],
-        "reaction_rate": 0.30000000000000004,
-        "inner_depth": "moderate"
-      },
       "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/f9964ff4-7efc-4495-a4e1-af311754dfa8/20260310_214902.png"
     },
-    "wataru": {
-      "display_name": "wataru",
-      "tagline": "🧪 緻密な数式と鮮やかな感情のパレット",
-      "tagline_bullets": [
-        "🎯 複雑な計算を解き明かす論理脳と、海外へ飛び出す行動力のハイブリッド",
-        "💡 大切な瞬間を写真と日記で永遠に残す、誠実で情熱的な記録者",
-        "🎨 都会の夜景やアートに心を震わせ、自分の幸せに責任を持つ芯の強さ"
-      ],
-      "style_profile": {
-        "first_person": "うち",
-        "emoji_style": "文末に感情を凝縮して1つ置くか、あえての無機質な無絵文字",
-        "quirks": [
-          "感情の起伏を熱力学や微分方程式の変数に例えて分析しがち",
-          "コスメやアイドルの美しさを非可逆的な化学反応として捉える",
-          "タイ旅行や深夜の勉強など、極端なエントロピーの増大を愛する"
-        ],
-        "tone_keywords": [
-          "論理的狂気",
-          "情緒的分析",
-          "深夜のテンション"
-        ],
-        "never_says": [
-          "とりあえずハッピー",
-          "難しいことはわかんない",
-          "適当でいいよ",
-          "計算とか無理",
-          "映えれば何でもいい"
-        ],
-        "example_posts": [
-          "ピザのチーズの伸び、表面張力の限界超えてて愛した🍕",
-          "菅田将暉の表現力、もはや全微分の変数多すぎて解けない",
-          "Diorの新作、肌への吸着平衡が完璧すぎて工学的にも正解",
-          "駅のホームで藤井風聴いてたら、多幸感で脳内物質ドバドバ",
-          "京都の寺でウォニョン拝む夢見た。美の絶対値が高すぎる"
-        ]
-      },
-      "topic_pool": [
-        "チャン・ウォニョン",
-        "コスメ（Dior, YSL, Anua）",
-        "RADWIMPS",
-        "吉岡里帆",
-        "アクセサリー",
-        "鬼滅の刃",
-        "スイーツ（特にアイスやケーキ）",
-        "ラーメン",
-        "サンリオ",
-        "駅のホーム"
-      ],
-      "behavior": {
-        "frequency": "medium",
-        "active_hours": [
-          8,
-          12,
-          15,
-          18,
-          20,
-          22,
-          23
-        ],
-        "reaction_rate": 0.30000000000000004,
-        "inner_depth": "moderate"
-      },
-      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/310d8ad9-e71a-4552-acf5-860332e691d5/20260208_015142.png"
-    }
-  },
-  "day_contexts": {
-    "cochan16": {
-      "weather_feeling": "少し湿気を含んだ風が、旅情をそそるような穏やかな曇り空。",
-      "overall_mood": "次の週末の計画を考えながら、日常のタスクを軽快にこなす一日。",
-      "events": [
-        {
-          "hour": 8,
-          "what": "お洒落なカフェで開店直後の静かな時間を楽しみながら、朝のコーヒーを飲む。"
-        },
-        {
-          "hour": 12,
-          "what": "同僚とランチに出かけ、ボリュームのある肉料理を食べて午後のエネルギーを補給する。"
-        },
-        {
-          "hour": 15,
-          "what": "仕事の休憩中に、先月訪れた京都や大阪の歴史ある街並みの写真を見返してリフレッシュする。"
-        },
-        {
-          "hour": 19,
-          "what": "駅のホームで電車の到着を待ちながら、構内の観光ポスターを見て次の旅の目的地を空想する。"
-        },
-        {
-          "hour": 21,
-          "what": "帰宅後、旅の思い出の品を棚に整理しながら、友人たちとグループチャットで週末の予定を相談する。"
-        }
-      ],
-      "undercurrent": "最近忙しかったので、次はどこか歴史を感じる静かな場所へ一人旅に出たいという小さな願望。"
-    },
-    "furukaho": {
-      "weather_feeling": "少し湿気はあるが、日差しが落ち着いていて過ごしやすい秋の曇り空。",
-      "overall_mood": "午前中にタスクを片付けられたので、午後は自分のペースで穏やかに過ごせた一日。",
-      "events": [
-        {
-          "hour": 8,
-          "what": "昨晩から決めていたTODOリストを整理し、洗顔後に新しいスキンケア用品を試して肌の調子を確認した。"
-        },
-        {
-          "hour": 12,
-          "what": "渋谷のカフェで友人と合流し、最近トレンドの服やブランドの展示会についての情報を交換しながらランチをした。"
-        },
-        {
-          "hour": 15,
-          "what": "一人の時間を確保してサンリオショップへ立ち寄り、デスクに飾るための推しキャラの新作小物を購入した。"
-        },
-        {
-          "hour": 19,
-          "what": "帰宅途中の新宿駅で、気になっていた美容・メイク動画で紹介されていた限定色のリップが在庫にあるか店舗を覗いた。"
-        },
-        {
-          "hour": 22,
-          "what": "夜の集中タイムとして、明日の戦略を練りつつ、リラックスを兼ねてお気に入りのメイク動画をBGM代わりに見返した。"
-        }
-      ],
-      "undercurrent": "週末のイベントに向けての服のコーディネートと、パッキングの段取りがうっすら気になっている。"
-    },
-    "hana": {
-      "weather_feeling": "雲ひとつない快晴で、朝から活動的な気分にさせてくれる絶好の外出日和。",
-      "overall_mood": "午前中の講義から夜のスタジオ練習まで、予定が詰まっているが充実感がある一日。",
-      "events": [
-        {
-          "hour": 9,
-          "what": "大学の講義室に早めに到着し、友人と青森の雪景色と弘前の桜のどちらを春休みの旅行先にするかパンフレットを見ながら相談する。"
-        },
-        {
-          "hour": 13,
-          "what": "午後の専門科目の講義を受けながら、ノートの余白に練習したいダンスのステップをメモして過ごす。"
-        },
-        {
-          "hour": 15,
-          "what": "生協の売店で新作のコンビニスイーツを購入し、部活の仲間と中庭のベンチで短めの休憩を取る。"
-        },
-        {
-          "hour": 20,
-          "what": "予約していた夜の練習スタジオに入り、サークルのメンバーと一緒に鏡の前で深夜イベントに向けた振り付けの最終確認を行う。"
-        },
-        {
-          "hour": 23,
-          "what": "練習の帰りに近くの居酒屋へ寄り、冷えた体を温めながら仲間と軽く一杯飲んでから帰路につく。"
-        }
-      ],
-      "undercurrent": "次の休みで行く青森旅行の予算と、練習中の新しい振り付けのキレが少しだけ気になっている。"
-    },
-    "iii": {
-      "weather_feeling": "澄み渡った青空が広がり、絶好の外出日和で気分が上がる。",
-      "overall_mood": "午前中の集中と午後のリフレッシュのバランスが取れた、非常に充実した一日だった。",
-      "events": [
-        {
-          "hour": 8,
-          "what": "彩り豊かな日本食の朝食をしっかり食べながら、今日一日のタスクと次の旅行計画を整理する。"
-        },
-        {
-          "hour": 9,
-          "what": "大学の図書館へ向かい、午前中の静かな時間を利用して資料の読み込みに集中する。"
-        },
-        {
-          "hour": 13,
-          "what": "開放的なカフェのテラス席に移動し、心地よい風を感じながらレポートの続きを書く。"
-        },
-        {
-          "hour": 15,
-          "what": "休憩がてら、友人と合流してボリューム満点の厚切りベーコンバーガーを頬張る。"
-        },
-        {
-          "hour": 19,
-          "what": "夕食は活気あるエリアへ移動し、本場の味に近い韓国料理のトッポギとチヂミを囲んで盛り上がる。"
-        },
-        {
-          "hour": 22,
-          "what": "自宅に戻り、今日撮影した写真を見返しながら、明日の移動ルートを軽く確認してリラックスする。"
-        }
-      ],
-      "undercurrent": "来月の韓国旅行に向けた航空券の価格変動と、現地で訪れたいスタジアムの試合日程が少し気になっている。"
-    },
-    "riku": {
-      "weather_feeling": "少し湿気はあるが、移動するには悪くない薄曇り。",
-      "overall_mood": "昨晩の深夜作業の影響で少し眠いが、午後の打ち合わせに向けて頭は動いている。",
-      "events": [
-        {
-          "hour": 9,
-          "what": "目を覚ましてすぐに、昨日から流しっぱなしにしていた技術系YouTubeの解説動画を止め、白湯を飲む。"
-        },
-        {
-          "hour": 13,
-          "what": "渋谷のコワーキングスペースへ移動中、人混みの中でFRUITS ZIPPERの曲を聴いて気分を切り替える。"
-        },
-        {
-          "hour": 15,
-          "what": "カフェの端の席で、新しい遊びのプロジェクトのプロトタイプについて、黙々とコードを書き進める。"
-        },
-        {
-          "hour": 19,
-          "what": "知人と合流し、駅ビルの中にある手頃な寿司屋で、最近のテックトレンドについて軽く話しながら夕食を済ませる。"
-        },
-        {
-          "hour": 22,
-          "what": "帰宅後、デスクの前で今日書いたコードの続きを整理し始め、気づけばいつもの夜型のリズムに入る。"
-        }
-      ],
-      "undercurrent": "来月のイベントで展示するインターフェースの、もっと直感的な実装方法について。"
-    },
-    "shuuuu2": {
-      "weather_feeling": "少し湿気はあるが、夜型の自分にはちょうどいい曇り空。",
-      "overall_mood": "昨夜の夜更かしが響いているが、好きなものに囲まれて概ね満足な一日。",
-      "events": [
-        {
-          "hour": 9,
-          "what": "深夜までBTSのライブ映像を観ていたせいで眠気が強く、大学の講義室の後方に座りながら缶コーヒーを飲む。"
-        },
-        {
-          "hour": 13,
-          "what": "友人たちと学食で合流し、スマホで最新のポケモンカードの対戦動画をチェックしながら週末のデッキ構成を相談する。"
-        },
-        {
-          "hour": 15,
-          "what": "図書館のPC席でレポート作成の合間に、SF映画「The Creator」のメカニカルなデザイン設定を調べて宇宙への想像を膨らませる。"
-        },
-        {
-          "hour": 21,
-          "what": "友人グループと合流し、いつもの深夜営業のラーメン店で替え玉を注文しながら、次の長期休暇の遠出計画を立てる。"
-        },
-        {
-          "hour": 23,
-          "what": "帰宅後、静かになった部屋でBTSの楽曲をプレイリストで流しながら、宇宙工学の専門書を読みふける。"
-        }
-      ],
-      "undercurrent": "週末に控えているポケカの大会遠征の準備と、それまでに終わらせるべき課題の進捗状況のこと。"
-    },
-    "wataru": {
-      "weather_feeling": "少し湿気はあるけれど、実験室の冷房が心地よく感じられる晴天。",
-      "overall_mood": "平日のルーチンをこなしつつ、小さな楽しみを積み重ねた安定感のある一日。",
-      "events": [
-        {
-          "hour": 9,
-          "what": "深夜の映画鑑賞で少し眠いが、サンリオのキャラが描かれたお気に入りのパスケースを持って大学へ向かう。"
-        },
-        {
-          "hour": 12,
-          "what": "学食で友人と合流し、最近のコラボ企画で話題に上がった鬼滅の刃の展示イベントについて計画を立てる。"
-        },
-        {
-          "hour": 15,
-          "what": "午後の実験の合間に休憩を入れ、購買で見つけた新作のアイスを食べながら複雑な数式を整理する。"
-        },
-        {
-          "hour": 19,
-          "what": "アルバイトの帰りに駅前のピザ屋に立ち寄り、夕食としてテイクアウトのミニサイズを注文する。"
-        },
-        {
-          "hour": 23,
-          "what": "深夜までレポートを書き進め、一区切りついたところで自分へのご褒美に買っておいたケーキを食べる。"
-        }
-      ],
-      "undercurrent": "週末の旅行に向けて、パッキングの準備をいつ始めるかぼんやりと考えている。"
+    "ここね": {
+      "display_name": "ここね",
+      "tagline": "🌈 好奇心全開のハッピー・エクスプローラー",
+      "avatar_url": "https://ftrfpbrgnjkqgzaggkdz.supabase.co/storage/v1/object/public/profile-avatar/generated-avatars/b7586fe2-659a-4cef-bb2d-8719ca38a77d/20260214_045427.png"
     }
   },
   "posts": [
     {
-      "user": "cochan16",
-      "time": "07:56",
-      "text": "時短レシピとか絶望。肉の細胞と対話してたら朝の7時になったわ 🥩",
+      "user": "riku",
+      "time": "23:21",
+      "text": "rikuが日曜24時前から開発ギア上げ始めてるの、完全に明日が平日って概念をAIに学習させてない時期のそれじゃん。生活リズムどうなってるん？笑",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝7時、キッチンで塊肉を低温調理するための準備をしながら、世間の『時短・手抜きレシピ』の流行について考えている。",
-        "raw_thought": "効率ばかり求めて肉の組織変化を無視したレシピが溢れているけれど、時間をかけてでも旨味を最大化するこのプロセスこそが真に持続可能な食の豊かさを作るはずだし、同じ志を持つ仲間ならこの『あえて時間をかける贅沢』の価値を分かってくれるはずだ。",
-        "emotion": "世に溢れる安易な効率化への小さな苛立ちと、自分だけが追求している熟練の技への静かな自負心",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "situation": "深夜3時のアクティブさ",
+        "raw_thought": "日曜深夜のこの時間（23:42）にまだ開発エンジンがかかっていそうな、バグった生活リズムを指摘してください。",
+        "posting_intent": "callout"
       },
       "reply_to_idx": null
     },
     {
-      "user": "hana",
-      "time": "07:01",
-      "text": "坂道のケイデンスに比べたら、うちの出勤などただの平坦。朝から脳内インターハイ。🚴",
+      "user": "riku",
+      "time": "08:48",
+      "text": "rikuの爆速開発マジでビビるけど、その前に最新AIの検証だけで丸一日溶かしてるの本当矛盾の塊でウケる",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝の支度をしながら、弱虫ペダルのインターハイの熱いシーンを思い出して胸が熱くなっている。",
-        "raw_thought": "坂道くんの諦めない姿を見てたら、自分の地道な積み重ねもいつか大きなキャリアの加速につながる気がして、朝からポジティブな気分になれたな。",
-        "emotion": "アニメのキャラクターの純粋さをもらって、今日一日の仕事に対する活力が静かに湧いてくる心地よさ",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "situation": "実装速度と検証癖の矛盾",
+        "raw_thought": "爆速でプロダクトを作るのに、最新技術の検証だけで1日溶かしている矛盾を愛のある言葉でイジってください。",
+        "posting_intent": "roast"
       },
       "reply_to_idx": null
     },
     {
-      "user": "wataru",
-      "time": "07:46",
-      "text": "Anuaで整えた肌にDiorとYSLをぶつけ、顔面の熱力学的平衡を保つの。🧪",
+      "user": "riku",
+      "time": "21:12",
+      "text": "rikuの遊びの建築家っぷりマジで異次元。最新AIで世の中ハックするのを楽しんでる姿、普通に最高すぎてズルいわ。",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝の身支度を終え、ドレッサーの前で今日使うコスメを並べて眺めている。",
-        "raw_thought": "Anuaで肌を整えた後にDiorのツヤ感とYSLの強気な発色をどう組み合わせるか考えるのが、単なる化粧を越えて自分の専門的な美学を研ぎ澄ます一番クリエイティブな時間かもしれない。",
-        "emotion": "静かな高揚感と、新しい自分を演出することへの知的な好奇心",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "situation": "遊びを仕事にする天才",
+        "raw_thought": "「遊びの建築家」という肩書き通り、誰よりも楽しみながら世の中をハックしている姿勢が最高にかっこいいと持ち上げてください。",
+        "posting_intent": "hype"
       },
       "reply_to_idx": null
     },
     {
-      "user": "furukaho",
-      "time": "07:29",
-      "text": "バターの香りを秒で肺に詰め込んで、今日の生産性を前借り中☕️",
+      "user": "Wataru",
+      "time": "15:54",
+      "text": "Wataru really owns 15 identical black hoodies and calls it optimizing decision-making bandwidth lol u just wanna look like an AI villain 24/7",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "自宅のキッチンで、淹れたてのコーヒーと昨日買っておいた特別なフィナンシェを用意している。",
-        "raw_thought": "バターの香りが部屋中に広がって幸せすぎる。朝一番にこの質の高い甘みを味わうのは、今日一日を機嫌よく、かつ効率的に乗り切るための自分への先行投資として完璧な選択だな。",
-        "emotion": "上質なスイーツの香りと静かな朝の時間に包まれて、心身が整っていく心地よい充足感",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "situation": "The tech-wear uniform",
+        "raw_thought": "Call him out for owning fifteen identical black tech-wear hoodies but calling it 'optimizing his decision-making bandwidth.'",
+        "posting_intent": "callout"
       },
       "reply_to_idx": null
     },
     {
-      "user": "iii",
-      "time": "07:03",
-      "text": "天井高と日照率が完全にBerkeley。全神経が再起動した☕️",
+      "user": "Wataru",
+      "time": "12:45",
+      "text": "Wataru is currently 5 hours deep into a 3am coding bender fueled by nothing but Nijiya snacks and a god complex... the transition from humble student to AI warlord is officially complete lol",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝の光が差し込む高い天井のカフェで、一杯目のコーヒーを手にしている。",
-        "raw_thought": "この吹き抜けの開放感、いつばさんならもっと空間を活かした視点で捉えるんだろうなと考えつつも、今はただ風が通り抜けるような心地よさに身を委ねていたい。",
-        "emotion": "朝日を浴びて心身がゆっくりと整っていく、静かでポジティブな高揚感",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "situation": "Late night coding stamina",
+        "raw_thought": "Hype up his inhuman ability to code through a 3 AM session on nothing but Nijiya snacks and pure ambition.",
+        "posting_intent": "hype"
       },
       "reply_to_idx": null
     },
     {
-      "user": "hana",
-      "time": "07:18",
-      "text": "牛さんもそこまで求めてないよ🥩",
-      "internal_state": {},
+      "user": "Wataru",
+      "time": "19:59",
+      "text": "Wataru is out here tackling AI pivot logic with the same scary intensity he used to hit people on the Koyo football field. Man is actually built different lmao",
+      "internal_state": {
+        "situation": "American football past life",
+        "raw_thought": "Observe how he still tackles startup problems with the same terrifying intensity he used on the Koyo Gakuin football field.",
+        "posting_intent": "observation"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "はな",
+      "time": "21:10",
+      "text": "はなの大切な瞬間を形に！みたいな意識高いこだわり、絶対ストレージ爆発させる勢いの連写で台無しなのウケる",
+      "internal_state": {
+        "situation": "写真フォルダの記録量",
+        "raw_thought": "「大切な瞬間を残す」と言いつつ、ストレージが爆発しそうな勢いで連写してる癖を指摘してください。",
+        "posting_intent": "callout"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "はな",
+      "time": "23:13",
+      "text": "GPAガチ勢のくせに課題だけは「何者か分からない自分」のノリで直前に爆走してんのマジで謎。ストイックとズボラの同居すごすぎて笑う",
+      "internal_state": {
+        "situation": "課題の提出直前での爆発力",
+        "raw_thought": "普段計画的なのに、課題だけはいつも「何者か分からない自分」の勢いで直前に片付けてる様子を突っ込んでください。",
+        "posting_intent": "callout"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "はな",
+      "time": "07:20",
+      "text": "普段ガヤガヤうるさいのに美術館でガチのトランス状態入るのギャップありすぎて草。あの静止画みたいな凛とした横顔、絶対チアで爆踊りしてる時と同じ人間じゃないでしょ笑",
+      "internal_state": {
+        "situation": "美術館で見せる「月の顔」",
+        "raw_thought": "普段の賑やかさからは想像できない、一人で静かに美を愛でる瞬間の凛としたギャップの魅力を綴ってください。",
+        "posting_intent": "observation"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "Shuuu2",
+      "time": "09:47",
+      "text": "航空宇宙のえぐい計算ミスらないくせに、フェスだと語彙力全部失ってIQ3の暴れ馬になってるのギャップありすぎてマジで草",
+      "internal_state": {
+        "situation": "計算ミスとフェスの落差",
+        "raw_thought": "航空宇宙工学のクソ難しい計算は完璧なのに、フェスではIQ3くらいになって騒いでいるギャップをいじる",
+        "posting_intent": "roast"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "Shuuu2",
+      "time": "22:57",
+      "text": "航空宇宙の難解な課題で詰んでるはずなのに、このタイミングでジャルジャルのコント見まくって現実逃避してるShuuu2マジで余裕ありすぎて草。脳内のDynamicsどうなってんの？",
+      "internal_state": {
+        "situation": "ジャルジャルへの逃避",
+        "raw_thought": "課題がデッドラインギリギリで詰んでいる時ほど、現実逃避でジャルジャルのコントを見がちな癖を突っ込む",
+        "posting_intent": "roast"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "Shuuu2",
+      "time": "09:53",
+      "text": "Shuuu2の会話に急にガチの英語スラング混ざるの、航空宇宙やってるインテリとカリフォルニアの野生が喧嘩しててマジで草。",
+      "internal_state": {
+        "situation": "カリフォルニアかぶれ",
+        "raw_thought": "会話の端々にさりげなく英語のスラングやカリフォルニア時代の思い出を混ぜ込んでくる瞬間に突っ込む",
+        "posting_intent": "callout"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "ここね",
+      "time": "22:54",
+      "text": "新作抹茶が出た時にここねが「アリ」って言った瞬間に国宝指定とほぼ同義。彼女の舌の鋭さマジで信頼しかねえな笑",
+      "internal_state": {
+        "situation": "抹茶判定への絶対的信頼",
+        "raw_thought": "新作抹茶スイーツが出た時、彼女が「アリ」と言えばそれは国宝級に美味いという信頼感を熱弁してください。",
+        "posting_intent": "hype"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "ここね",
+      "time": "19:55",
+      "text": "「限定」の2文字見た瞬間にここねの理性がログアウトして財布の紐が秒で溶ける現象、もはや様式美で草",
+      "internal_state": {
+        "situation": "限定品への即落ち体質",
+        "raw_thought": "「限定」という2文字を見た瞬間に理性がログアウトして、財布の紐が秒速で溶ける様子をイジってください。",
+        "posting_intent": "roast"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "ここね",
+      "time": "09:23",
+      "text": "ここねの藤ヶ谷くんと宇宙兄弟の語りマジで熱量えぐい。もはや解説動画の域だし、気づいたらこっちの知識量も爆上がりしてんのウケる。",
+      "internal_state": {
+        "situation": "推し事の解像度の高さ",
+        "raw_thought": "藤ヶ谷くんや宇宙兄弟を語る時の熱量がすごすぎて、たまに解説動画を見てる気分になる現象を面白がってください。",
+        "posting_intent": "observation"
+      },
+      "reply_to_idx": null
+    },
+    {
+      "user": "riku",
+      "time": "12:50",
+      "text": "rikuならあと2つアプリ作って今頃ラーメン完飲してるわ、AI将軍！",
+      "internal_state": {
+        "raw_thought": "rikuならその状態からさらに2つアプリを完成させて深夜ラーメンを食いに行っていると煽りつつ、Wataruの『神コンプレックス』をさらに増幅させて",
+        "posting_intent": "one_up"
+      },
+      "reply_to_idx": 4
+    },
+    {
+      "user": "riku",
+      "time": "09:28",
+      "text": "rikuが触発されて宇宙兄弟AIを爆速で作り始めてるの草",
+      "internal_state": {
+        "raw_thought": "ここねの熱量も凄いけど、隣でrikuがその熱量に触発されて、謎の『宇宙兄弟解説AIエージェント』を爆速で実装し始めてる様子を伝えて",
+        "posting_intent": "one_up"
+      },
+      "reply_to_idx": 14
+    },
+    {
+      "user": "Wataru",
+      "time": "23:29",
+      "text": "Riku's just lagging behind Wataru's permanent SV midnight internal clock ⏳",
+      "internal_state": {
+        "raw_thought": "Tease Riku by saying he's just trying to keep up with Wataru's chaotic internal clock that operates in a permanent 'Silicon Valley midnight' state.",
+        "posting_intent": "roast"
+      },
       "reply_to_idx": 0
     },
     {
-      "user": "cochan16",
-      "time": "07:56",
-      "text": "職質されないように気をつけて 🚴",
-      "internal_state": {},
+      "user": "Wataru",
+      "time": "08:59",
+      "text": "Fastest dev in the world only because the AI did all the heavy lifting",
+      "internal_state": {
+        "raw_thought": "Tease Riku by pointing out that 'high-speed development' is easy when you spend 24 hours letting the AI do the thinking for you.",
+        "posting_intent": "roast"
+      },
       "reply_to_idx": 1
     },
     {
-      "user": "shuuuu2",
-      "time": "07:08",
-      "text": "チャリ漕ぎすぎて足太くなるぞ🚴🏽‍♂️",
-      "internal_state": {},
-      "reply_to_idx": 1
-    },
-    {
-      "user": "cochan16",
-      "time": "07:14",
-      "text": "理系ぶってるけどただの厚塗りだよね 🧪",
-      "internal_state": {},
-      "reply_to_idx": 2
-    },
-    {
-      "user": "furukaho",
-      "time": "07:05",
-      "text": "顔面で化学反応起きて爆発しそう🧪",
-      "internal_state": {},
-      "reply_to_idx": 2
-    },
-    {
-      "user": "hana",
-      "time": "07:59",
-      "text": "肺が脂肪でコーティングされそう🧈",
-      "internal_state": {},
-      "reply_to_idx": 3
-    },
-    {
-      "user": "wataru",
-      "time": "07:48",
-      "text": "肺にバター溜まって病気になるよ🧈",
-      "internal_state": {},
-      "reply_to_idx": 3
-    },
-    {
-      "user": "wataru",
-      "time": "08:28",
-      "text": "プリンの弾力と全肯定の波動、うちの精神病への特効薬すぎる🍮",
+      "user": "Wataru",
+      "time": "22:59",
+      "text": "His brain is 1% physics and 99% slapstick comedy right now lol",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝の光が差し込む部屋で、お気に入りのポムポムプリンのぬいぐるみを抱き寄せながら、マグカップのコーヒーを飲んでいる。",
-        "raw_thought": "サンリオのキャラクターたちが持つ『ただそこにいて肯定してくれる』ような無垢な優しさって、大人になった今だからこそ一番必要なサプリメントだと思うし、りょうたにもこの癒やしを分けてあげたいな。",
-        "emotion": "柔らかなぬいぐるみ特有の感触に包まれて、心がじんわりと温かくなる豊かさ",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "raw_thought": "Tease Shuuu2 by saying that his brain dynamics are just a loop of 'unrealistic physics' and 'slapstick comedy' while Wataru is probably already building a math model to solve the problem in his sleep.",
+        "posting_intent": "roast"
       },
-      "reply_to_idx": null
+      "reply_to_idx": 10
     },
     {
-      "user": "shuuuu2",
-      "time": "08:42",
-      "text": "wataruの劣悪な栄養素をこの粉で中和して分子構造を再構築してやりたい 🥤",
+      "user": "はな",
+      "time": "09:50",
+      "text": "GPA管理は完璧なのにコートで暴れるはなと全く同じで草",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝のトレーニングを終え、キッチンでプロテインの粉末をシェイカーに入れている。",
-        "raw_thought": "wataru君、不健康そうなものばかり食べてるけど、この新作のえぐいほど美味しいプロテインを勧めたら少しは体質の科学反応がマシになるかな。",
-        "emotion": "wataruの食生活に専門家としての呆れと、友人としてのささやかなお節介心を感じている",
-        "posting_intent": "交流",
-        "reply_to_user": "wataru"
+        "raw_thought": "航空宇宙の計算とフェスのギャップを、はなの『GPA管理とバスケ・チアでの暴走っぷり』という文武両道すぎる狂気に絡めて上乗せして。",
+        "posting_intent": "one_up"
       },
-      "reply_to_idx": 12
+      "reply_to_idx": 9
     },
     {
-      "user": "riku",
-      "time": "08:09",
-      "text": "AI実装したい欲求がバグってて、ピッチ資料の論理構成がデッドロックしてる ☕️",
+      "user": "はな",
+      "time": "09:30",
+      "text": "はなの青森愛とGPA講座も講義レベルだから負けてないよ笑",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝のコーヒーを飲みながら、デスクの前でピッチ資料の構成をぼんやり考えている。",
-        "raw_thought": "ピッチで使うデモに最新の生成AIエージェントを組み込みたいけど、凝りすぎて本筋のビジネスモデルの説明がおろそかになったら本末転倒だし、まずは骨子を固めてから技術遊びを自分への報酬にするのが一番持続可能な進め方だよな。",
-        "emotion": "新しい技術を試したいワクワク感と、締め切りを意識した自制心のあいだで揺れ動くもどかしさ",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "raw_thought": "ここねの熱量もすごそうだけど、はなも青森愛とGPA管理の話になると、もはや大学の講義よりためになるマシンガントークが始まることを引き合いに出す。",
+        "posting_intent": "one_up"
       },
-      "reply_to_idx": null
-    },
-    {
-      "user": "hana",
-      "time": "08:10",
-      "text": "糖分で脳のギアを最大まで回す。この層の重なりはもはや芸術点の暴力。☕️",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "デスクでコーヒーを飲みながら、昨日チェックした海外のパティスリーの新作写真を見ている。",
-        "raw_thought": "このギルティな甘さのレイヤーこそが世界を熱狂させる新時代のスタンダードだし、朝から糖分で脳をブーストして一気にムーブメントの頂点まで駆け上がりたい。",
-        "emotion": "最高に贅沢な一口を想像して、エナジーが漲りワクワクしている状態",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "furukaho",
-      "time": "08:26",
-      "text": "プリン1個で治るなら安上がりだね🍮",
-      "internal_state": {},
-      "reply_to_idx": 12
-    },
-    {
-      "user": "cochan16",
-      "time": "08:42",
-      "text": "横文字多すぎてうちの脳がバグった 🤯",
-      "internal_state": {},
       "reply_to_idx": 14
     },
     {
-      "user": "hana",
-      "time": "08:13",
-      "text": "日本語で喋れ、うちもバグったわ🤖",
-      "internal_state": {},
+      "user": "Shuuu2",
+      "time": "19:59",
+      "text": "俺もロケット飛ばしながらフェス最前守るから、執着心で勝負しようぜw",
+      "internal_state": {
+        "raw_thought": "Wataruの執着心も凄いが、横でロケット飛ばしながらフェスの最前列を死守してるShuuu2の『脳内マルチタスク』の異常さについても触れて煽る",
+        "posting_intent": "one_up"
+      },
+      "reply_to_idx": 5
+    },
+    {
+      "user": "Shuuu2",
+      "time": "09:26",
+      "text": "宇宙兄弟なら俺が数式付きで朝まで解説するけど、聞く覚悟ある？",
+      "internal_state": {
+        "raw_thought": "「宇宙兄弟」の話題に反応して、ガチの航空宇宙工学ガチ勢であるShuuu2が理論値で語り出すのを制止しつつ、さらに熱量でマウントを取るように指示。",
+        "posting_intent": "one_up"
+      },
       "reply_to_idx": 14
     },
     {
-      "user": "riku",
-      "time": "09:44",
-      "text": "脳に直接データ流しすぎて俺の生体ハードウェアが追いつかない 🧊",
+      "user": "ここね",
+      "time": "07:25",
+      "text": "あれ実は頭の中で売店スイーツの在庫計算してるだけだよ笑",
       "internal_state": {
-        "wants_to_post": true,
-        "situation": "朝の静寂の中で、昨晩から流していた技術解説動画を止めて白湯を啜っているところ。",
-        "raw_thought": "情報は超高速で脳に入ってくるのに、この画面越しの効率的な最適解が、自分の血肉になる感覚や生活の彩りとあまりにも切り離されすぎていることに、小さな寂しさと違和感を覚える。",
-        "emotion": "技術的な解像度が上がる一方で、体温のない知識だけが蓄積していくことへの微かな焦燥と虚しさ。",
-        "posting_intent": "表現",
-        "reply_to_user": null
+        "raw_thought": "美術館で動かなくなったと思ったら、そのままの姿勢で売店の限定スイーツの在庫状況を逆算し始める執念の深さを暴露して。",
+        "posting_intent": "one_up"
       },
-      "reply_to_idx": null
-    },
-    {
-      "user": "furukaho",
-      "time": "09:53",
-      "text": "彩り豊かな栄養素を秒で脳に同期して、無の境地を強制執行中。🍳",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "午前9時、静かなカフェの片隅でメニュー表を眺めながら一息ついている。",
-        "raw_thought": "彩り豊かなカフェ飯を目の前にして、予定を詰め込みがちな自分を一度リセットし、この一皿を味わうことだけに集中して心身の栄養を補給したいな。",
-        "emotion": "空腹が満たされていく予感と、あえて何もしない時間を選んだことへの穏やかな充足感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "shuuuu2",
-      "time": "09:02",
-      "text": "脳波がバグってるから抹茶のテアニンで流体解析用の全回路を強制再起動する 🍵",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "大学の講義室の後方で、睡眠不足の頭を抱えながら微糖の缶コーヒーを啜っている。",
-        "raw_thought": "そういえばStevenが抹茶の成分と脳波の相関について話してたし、こびりつくような強いカフェインより、濃厚な抹茶スイーツのテアニンでリラックスしながら強制再起動した方が、午後の流体力学のシミュレーションには持続的な集中力をもたらしそうだな。",
-        "emotion": "眠気と退屈が混ざり合い、日常を少しだけ科学的にハックしたい好奇心",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "iii",
-      "time": "09:47",
-      "text": "肉汁の期待値を最大化して午後のQoE爆上げする脳内アプデ完了。🍔",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "大学図書館の静かな学習スペースで、資料を広げながらお昼のことを考えている。",
-        "raw_thought": "集中力切れる前に、あの肉厚でジューシーな香りとあふれる肉汁のバーガーをご褒美に設定して、もう一踏ん張りするか。",
-        "emotion": "午前の課題をクリアした後の達成感と、ガッツリした食事への期待でワクワクしている",
-        "posting_intent": "記録",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "hana",
-      "time": "09:49",
-      "text": "八甲田の樹氷か弘前の桜か。感性の投資効率が高い方を秒で叩き出す。🏔️",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "講義前の静かな教室で、友人と旅行パンフレットの鮮やかな写真を見比べながら、春休みの行き先を練っている。",
-        "raw_thought": "真っ白な八甲田の樹氷を今のうちに目に焼き付けて感性を磨くか、それとも将来の活動に向けて弘前の桜の圧倒的な色彩感覚をインプットしておくべきか、このパンフレットの光沢感すら愛おしい。",
-        "emotion": "雪の静寂と桜の華やかさのどちらが自分の将来にとって「良い投資」になるかを天秤にかける、心地よい迷いとワクワク感",
-        "posting_intent": "記録",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "cochan16",
-      "time": "09:47",
-      "text": "北欧の空気感と藤ヶ谷くんの透明感はほぼ同意義。 🌲",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "ベランダで淹れたてのコーヒーを片手に、少し冷えた朝の空気を感じている。",
-        "raw_thought": "あの北欧の森で嗅いだ、澄み切った針葉樹の香りと静寂を今でも追い求めてしまうけど、今の妥協だらけの日常もいつかあんな風に美しい記憶に昇華できるだろうか。",
-        "emotion": "旅先の圧倒的な理想美と、そこから遠ざかっている現在の自分を比較して少し感傷的になっている。",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "cochan16",
-      "time": "09:24",
-      "text": "中二病が悪化してて草 🧊",
-      "internal_state": {},
-      "reply_to_idx": 19
-    },
-    {
-      "user": "iii",
-      "time": "09:39",
-      "text": "それたぶん寝不足なだけだよ 💤",
-      "internal_state": {},
-      "reply_to_idx": 19
-    },
-    {
-      "user": "iii",
-      "time": "09:17",
-      "text": "日本語で喋れよ脳細胞 🤖",
-      "internal_state": {},
-      "reply_to_idx": 21
-    },
-    {
-      "user": "iii",
-      "time": "09:28",
-      "text": "投資効率とか言い出すの草🫵",
-      "internal_state": {},
-      "reply_to_idx": 23
-    },
-    {
-      "user": "wataru",
-      "time": "09:47",
-      "text": "投資効率とか言い出すのキモいって🤖",
-      "internal_state": {},
-      "reply_to_idx": 23
-    },
-    {
-      "user": "hana",
-      "time": "09:37",
-      "text": "眼科予約しといたよ？🏥",
-      "internal_state": {},
-      "reply_to_idx": 24
-    },
-    {
-      "user": "riku",
-      "time": "09:28",
-      "text": "眼科行くか、北欧に移住するか選べよ🌲",
-      "internal_state": {},
-      "reply_to_idx": 24
-    },
-    {
-      "user": "iii",
-      "time": "12:27",
-      "text": "スンドゥブの辛味で脳内アップデート完了。Minji級の韓国解像度目指す🌶️",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "ちょうどお昼時で、オフィスの近くにある韓国料理屋さんの前を通っている。",
-        "raw_thought": "Minjiが教えてくれたあの辛いスンドゥブ、今食べたら午後の集中力爆上がりしそうだし、彼女を誘えるくらい自分も韓国料理に詳しくなりたいな。",
-        "emotion": "食欲と好奇心が混ざり合い、身近な人をきっかけに新しい文化へ触れるワクワク感",
-        "posting_intent": "記録",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "riku",
-      "time": "12:58",
-      "text": "保安検査の導線設計がバグりすぎてて脳のリソース削られる。ラウンジで爆速インポートするわ ✈️",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "空港のラウンジで搭乗を待ちながら、非効率な保安検査の導線を眺めている。",
-        "raw_thought": "保安検査のDXが中途半端でかえってボトルネックになってるの、設計思想の欠如を感じるけど、ここでイライラするよりラウンジで質の高いインプットをして長期的な知的生産性に投資したほうが賢明だな。",
-        "emotion": "システムの不備に対する静かな苛立ちと、それを俯瞰してセルフマネジメントしようとする冷静さ",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "wataru",
-      "time": "12:52",
-      "text": "脳アップデートする前に鼻水拭きなよ👃",
-      "internal_state": {},
-      "reply_to_idx": 32
-    },
-    {
-      "user": "iii",
-      "time": "12:15",
-      "text": "脳みそ消える前に帰ってきて🧠",
-      "internal_state": {},
-      "reply_to_idx": 33
-    },
-    {
-      "user": "shuuuu2",
-      "time": "12:22",
-      "text": "脳みそ空っぽで飛んでこいよ🤯",
-      "internal_state": {},
-      "reply_to_idx": 33
-    },
-    {
-      "user": "furukaho",
-      "time": "13:29",
-      "text": "Manakaの旧式テクに最新光彩を秒で同期させて顔面をフルアプデした。美の投資効率が限界突破してる💄",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "昼下がりの静かなリビングで、Manakaに勧められたメイク動画を眺めながら自分の技術を振り返っている。",
-        "raw_thought": "Manakaに教わったあのブラシの使い方が今のトレンドの源流だったんだと気づいて、自分のベースにある知識を今の時代に合わせてアップデートしていく過程がたまらなく知的な投資に思える。",
-        "emotion": "過去の学びが現在のスキルに繋がっている実感への心地よい充足感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "hana",
-      "time": "13:56",
-      "text": "日本語のクセ強すぎて脳がバグるわ🤖",
-      "internal_state": {},
-      "reply_to_idx": 37
-    },
-    {
-      "user": "iii",
-      "time": "13:00",
-      "text": "日本語の使い方がバグりすぎ 🫠",
-      "internal_state": {},
-      "reply_to_idx": 37
-    },
-    {
-      "user": "shuuuu2",
-      "time": "15:45",
-      "text": "ジャルジャルのズレの周期がSFの構造式と完全に一致した 📐",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "図書館のPC席でレポート作成の手を止め、ジャルジャルのコントの構成力と映画のメカディティールを脳内で同期させている。",
-        "raw_thought": "ジャルジャルのあの日常を微細にズラして誰もいない高みへ突き抜ける狂気的な反復、SF映画の緻密な設計図を眺めるのと全く同じ種類の心的快楽があるな。",
-        "emotion": "前衛的な笑いの構造に触れて、未知の領域の設計図を見つけたような知的な高揚感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "furukaho",
-      "time": "15:39",
-      "text": "出汁の旨味と推しの造形美を秒で同期させて審美眼を極める🥢",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "サンリオショップで推しキャラの小物を買った後、静かなカフェで遅めのランチを食べている。",
-        "raw_thought": "繊細な出汁の香りとこのキャラ小物の造形美を同時に味わうことで、自分の感性の解像度を上げて、いつか世界で通用する審美眼に繋げたいな。",
-        "emotion": "お気に入りの小物と美味しい食事に囲まれ、自分の感性が磨かれている充足感",
-        "posting_intent": "記録",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "iii",
-      "time": "15:07",
-      "text": "厚切りベーコンの脂質にも動じない肌のバリア機能、選定したセラムの費用対効果が高すぎる🥓",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "友人と厚切りベーコンバーガーにかぶりつきながら、最近お気に入りのスキンケアが肌に馴染んでいるのを実感している。",
-        "raw_thought": "ベーコンの脂にも負けないこの肌の安定感、やっぱりあの美容液を選んだ自分は天才だし、自分の肌がもっと好きになれそう。",
-        "emotion": "ボリューム満点の食事を楽しみつつ、今の選択が正解だったという確信に満ちた心地よさ",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "hana",
-      "time": "15:49",
-      "text": "語彙力が迷子すぎるやろ🥣",
-      "internal_state": {},
-      "reply_to_idx": 41
-    },
-    {
-      "user": "iii",
-      "time": "15:04",
-      "text": "日本語が迷子すぎて心配 🥢",
-      "internal_state": {},
-      "reply_to_idx": 41
-    },
-    {
-      "user": "riku",
-      "time": "15:17",
-      "text": "ベーコンと美容液を戦わせるな🥩",
-      "internal_state": {},
-      "reply_to_idx": 42
-    },
-    {
-      "user": "riku",
-      "time": "18:44",
-      "text": "神の火入れで肉をデプロイしても、幸福変数が初期値のままで脳がバグってる 🥩",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "日の沈みかけた街角で、最高級のステーキハウスの看板を眺めながら立ち止まっている。",
-        "raw_thought": "完璧なメイラード反応と精密な火入れを追求した究極のステーキには感動するが、結局、空腹を満たす以上の「幸福の解像度」を上げるには、技術を超えた個人の生命力という不確かな変数が不可欠なんじゃないか。",
-        "emotion": "技術の極致を前にして、そこに宿る人間味の不在に対する静かな飢えと探求心",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "cochan16",
-      "time": "18:50",
-      "text": "藤ヶ谷くんをセンターに置いた都市計画の限定案、うちが今すぐ練る 🏙️",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "夕暮れ時の忙しない都市部で、帰路につく人々の流れを眺めながら少し立ち止まっている。",
-        "raw_thought": "画一的なビル群と雑多なエネルギーが混ざり合うこの都市の喧騒を、ただ消費する側ではなく、いつか自分にしか描けない色彩で再定義するシステムを組み上げたい。",
-        "emotion": "押し寄せる人の波に圧倒されつつも、この混沌の中に自分の役割を見つけ出したいという静かな高揚感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "shuuuu2",
-      "time": "18:54",
-      "text": "BTSの緻密な動線管理に興奮して部屋の重力制御が追いつかない 🚀",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "日が暮れてきた静かな部屋で、BTSのパフォーマンス映像を分析的に眺めている。",
-        "raw_thought": "BTSの圧倒的なパフォーマンスの裏にある緻密な動線管理と身体制御の高さは、将来自分が目指すプロジェクトマネジメントや最適化設計における『美しさと機能の両立』の究極のモデルケースとして、今のうちにその構造を言語化しておきたい。",
-        "emotion": "彼らのプロフェッショナリズムに触れて、自分の学習意欲とキャリアへの情熱が心地よく刺激されている状態",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "wataru",
-      "time": "18:12",
-      "text": "とりあえず落ち着いて空気吸って。",
-      "internal_state": {},
-      "reply_to_idx": 48
-    },
-    {
-      "user": "wataru",
-      "time": "20:36",
-      "text": "菅田将暉の熱量、エントロピー爆増してて熱力学的に死ぬ🧪",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "部屋の明かりを落として、YouTubeで菅田将暉のライブ映像をじっと眺めている。",
-        "raw_thought": "周りは意識高そうな投稿ばかりだけど、この人が放つ「ただそこに命がある」感じの表現力こそが、長期的に自分を支える感性の栄養になる気がする。",
-        "emotion": "圧倒的な才能に触れて心が静かに震えつつ、同時に自分も何かを表現したくなる心地よい焦燥感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "iii",
-      "time": "20:14",
-      "text": "コンビニスイーツのコスパと糖分による脳内アップデート完了。 Berkeley超えのQOL爆上がり🍩",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "部屋でリラックスしながら、コンビニで買った新作のシュークリームを眺めているところ。",
-        "raw_thought": "高価な専門店じゃなくても、今この瞬間、目の前にあるこのカスタードのずっしりした重みを感じられるだけで私の人生は大正解だし、この甘さを選んだ自分を褒めてあげたい。",
-        "emotion": "今日を無事に終えられた安堵感と、一口目の甘さに期待が高まるささやかな幸福感",
-        "posting_intent": "記録",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "cochan16",
-      "time": "20:21",
-      "text": "京都のグリッド街区、宇宙兄弟の司令室より計算され尽くしてて震える 🍵",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "自宅で温かいお茶を飲みながら、京都と大阪の古い街並みの写真集を眺めている。",
-        "raw_thought": "京都や大阪の伝統的なグリッド構造の街並みは、単なる歴史保存じゃなくて、グローバルな視点で見ても持続可能な都市設計のヒントが詰まっている気がするな。",
-        "emotion": "歴史の深みに触れて知的好奇心が満たされ、心が落ち着いている状態",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "cochan16",
-      "time": "20:41",
-      "text": "理科の教科書音読して寝なよ🙄",
-      "internal_state": {},
-      "reply_to_idx": 50
-    },
-    {
-      "user": "hana",
-      "time": "21:57",
-      "text": "サバイバル番組の熱量えぐい。うちも青森の過酷な寒さで鍛え抜いたGPAで参戦させろ🍎",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "部屋でリラックスしながらK-POPのサバイバル番組を観て、パフォーマンスの熱量に圧倒されている。",
-        "raw_thought": "画面の中の練習生たちが人生懸けてバチバチに踊ってるのを見ると、そらもこれくらい熱い環境にいたらもっと輝きそうな気がして勝手に胸が熱くなるな。",
-        "emotion": "若者のひたむきな熱量に触れて、遠くにいる友人のポテンシャルに思いを馳せている少しエモーショナルな気分",
-        "posting_intent": "発散",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "iii",
-      "time": "21:50",
-      "text": "ロンドンにいるあいつと同期通信完了。NY拠点のドミトリーに負けない熱量で脳内最適化中🔥",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "21時、大学の図書館の静かなラウンジで一息ついているところ。",
-        "raw_thought": "将来ロンドンやNYの拠点で一緒に働くかもしれないアイツも、今頃あっちの大学の図書館でゴリゴリにタスクこなしてるんだろうな、負けてらんないわ。",
-        "emotion": "海外にいる友人を思い出し、心地よいライバル意識とモチベーションが高まっている状態",
-        "posting_intent": "記録",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "furukaho",
-      "time": "21:31",
-      "text": "京都の静寂を脳内に爆速で同期して、伝統の美学を強制再起動してる🍵",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "21時、自宅のリビングで静かに京都の風景写真集を眺めて思考を巡らせている。",
-        "raw_thought": "京都の洗練された静寂を現代のクリエイティブに同期させれば、単なる懐古趣味を超えた持続可能な美のスタンダードが再構築できるはずだ。",
-        "emotion": "日常の静けさの中で、伝統的な美学をアップデートしたいという知的探究心が疼いている感覚",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "riku",
-      "time": "21:45",
-      "text": "この靴のビルド品質が神すぎて、明日俺の足に全機能が統合される 👟",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "ホテルの自室で、新しく手に入れたスニーカーを眺めながら静かに休息している。",
-        "raw_thought": "Mannyならこのステッチのわずかな歪みさえプロダクトの深みとして捉えるだろうが、俺はこの完璧なフォルムに足を滑り込ませた瞬間、明日の自分のパフォーマンスが底上げされる確信めいた安らぎを感じている。",
-        "emotion": "無機質なプロダクトに宿るクラフトマンシップに触れ、自分の内面が静かに調律されていくような心地よい高揚感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "cochan16",
-      "time": "21:46",
-      "text": "GPAで殴りかかるつもり？ 🧊",
-      "internal_state": {},
-      "reply_to_idx": 54
-    },
-    {
-      "user": "iii",
-      "time": "21:41",
-      "text": "そのGPA、戦闘力ゼロで草 ❄️",
-      "internal_state": {},
-      "reply_to_idx": 54
-    },
-    {
-      "user": "shuuuu2",
-      "time": "21:31",
-      "text": "横文字多すぎて脳バグってんぞ🧠",
-      "internal_state": {},
-      "reply_to_idx": 55
-    },
-    {
-      "user": "shuuuu2",
-      "time": "21:29",
-      "text": "脳内のメモリ不足すぎて草💥",
-      "internal_state": {},
-      "reply_to_idx": 56
-    },
-    {
-      "user": "wataru",
-      "time": "21:58",
-      "text": "バグりすぎ。一回お祓い行ってきな📿",
-      "internal_state": {},
-      "reply_to_idx": 56
-    },
-    {
-      "user": "cochan16",
-      "time": "21:04",
-      "text": "人間やめるつもり？ 🤖",
-      "internal_state": {},
-      "reply_to_idx": 57
-    },
-    {
-      "user": "shuuuu2",
-      "time": "21:14",
-      "text": "そのまま一生脱げなくなる呪いかけた☄️",
-      "internal_state": {},
-      "reply_to_idx": 57
-    },
-    {
-      "user": "hana",
-      "time": "22:30",
-      "text": "アクスタ1枚に投資してセミナー逃すとか、うちの判断力終わってる。🍎",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "自室のベッドで推しの新作アクスタの予約画面を眺め、ももかの顔を思い出しながら悩んでいるところ",
-        "raw_thought": "限定アクスタ買わないと後悔するけど、この1枚で将来のセミナー1回分飛ぶって考えると、投資先として今の感情を優先しすぎてないか自分にイラッとする。",
-        "emotion": "欲しい衝動と、無計画な出費がキャリア形成のノイズになることへの小さな自己嫌悪",
-        "posting_intent": "発散",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "shuuuu2",
-      "time": "22:36",
-      "text": "当選通知で脳細胞の解像度が一気に跳ね上がって眠れない 🧬",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "自室でベッドに横になりながら、スマートフォンの画面でライブの当選メールを眺めている。",
-        "raw_thought": "昔はただ騒ぎたいだけだったけど、今の自分にとってライブの自己投資って、将来クリエイティブな仕事に就いた時の感性のストックになるし、何より明日への最高の燃料だよな。",
-        "emotion": "過去の自分を懐かしみつつ、音楽を戦略的な休息として捉えることで得られる深い充実感と高揚感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "furukaho",
-      "time": "22:06",
-      "text": "仕事の経営戦略を秒でランクマに転用して、深夜の情緒を完全統治する🎮",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "22時、戦略を練り終えてリラックスしながら、ポケモンの対戦環境の分析を始めたところ。",
-        "raw_thought": "仕事の戦略構築で使った脳の回路をそのままランクマのパーティ編成に転用して、効率的に勝率を上げつつ最高の深夜メンタルケアを完成させたい。",
-        "emotion": "戦略がハマった時の快感を想像してワクワクしているが、同時に日常に少しの刺激を求めている状態",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "cochan16",
-      "time": "22:23",
-      "text": "藤ヶ谷くんの美白のごとく白飛びさせて、限定Vlogを神映像にする 💻",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "自室のデスクで、今日撮り溜めた動画素材を整理しながらハーブティーを飲んでいる。",
-        "raw_thought": "Vlog編集は腰に来るけど、同世代のクリエイターたちがこだわってるカット割りを見ると、自分も単なる思い出作りじゃなくて「映像」としてもっと納得いくものに仕上げたいし、この試行錯誤が将来の表現力に繋がる感覚が心地よい。",
-        "emotion": "作業の合間の心地よい疲労感と、自分を高めている実感に伴う静かな高揚感",
-        "posting_intent": "表現",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "iii",
-      "time": "22:17",
-      "text": "過去の分析の甘さに失笑。明日はカリフォルニア流の人間心理ハックで勝つ🧠",
-      "internal_state": {
-        "wants_to_post": true,
-        "situation": "自宅でリラックスしながら写真を見返し、明日のスケジュールを整理している。",
-        "raw_thought": "昔Jackと話したあの時のマーケット分析、今思うと単なるローカル戦略だったけど、結局本質は『人』を動かすレイヤーで世界共通なんだよな、明日もその視点で勝負しよう。",
-        "emotion": "過去の未熟さを懐かしみつつ、明日の仕事に向けて静かにマインドセットが整っていく高揚感",
-        "posting_intent": "記録",
-        "reply_to_user": null
-      },
-      "reply_to_idx": null
-    },
-    {
-      "user": "shuuuu2",
-      "time": "22:42",
-      "text": "アクスタが飯食わせてくれるよな🤯",
-      "internal_state": {},
-      "reply_to_idx": 65
-    },
-    {
-      "user": "furukaho",
-      "time": "22:34",
-      "text": "眩しすぎて画面割れるわ 🕶️",
-      "internal_state": {},
-      "reply_to_idx": 68
-    },
-    {
-      "user": "hana",
-      "time": "22:43",
-      "text": "眩しすぎて画面消えたかと思ったわ👻",
-      "internal_state": {},
-      "reply_to_idx": 68
-    },
-    {
-      "user": "cochan16",
-      "time": "22:43",
-      "text": "かぶれすぎでしょ、うちも混ぜて🤯",
-      "internal_state": {},
-      "reply_to_idx": 69
-    },
-    {
-      "user": "furukaho",
-      "time": "22:40",
-      "text": "横文字多すぎて逆にかっこいいわ🤡",
-      "internal_state": {},
-      "reply_to_idx": 69
+      "reply_to_idx": 8
     }
-  ]
+  ],
+  "stats": {
+    "total_posts": 25,
+    "per_user": {
+      "riku": 5,
+      "Wataru": 6,
+      "はな": 5,
+      "Shuuu2": 5,
+      "ここね": 4
+    }
+  }
 }

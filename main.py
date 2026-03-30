@@ -560,8 +560,10 @@ def generate_internal_state(
 STAGE2_SYSTEM = """\
 You write a single SNS post as a specific person.
 Output ONLY the post text. No explanation, no quotes, no hashtags.
-The post MUST be 15-50 characters. Think real Twitter/Instagram Story — short, raw, unfiltered.
-NEVER sound like an advertisement, manifesto, or motivational quote."""
+The post MUST be 15-50 characters. Think real Twitter/Instagram Story.
+CRITICAL: This is a PUBLIC post. The person knows their followers are watching.
+They are NOT talking to themselves. They are posting FOR an audience.
+Think: sharing, flexing, complaining to followers, asking opinions, reacting to something."""
 
 STAGE2_USER_TEMPLATE = """\
 この人としてSNS投稿を1つ書いてください。
@@ -589,8 +591,10 @@ STAGE2_USER_TEMPLATE = """\
 - ハッシュタグ禁止。
 - 「最高」「素敵」「充実」「幸せ」の多用禁止。
 - 投稿例の単語やフレーズをそのまま使うな。
-- 説明的にならない。感情の断片だけ出す。
-- リアルな20代のつぶやきのように。
+- これは公開投稿。フォロワーが見ていることを意識した文章にする。
+- 独り言・心の声ではない。「みんなに向けて発信してる」感覚。
+- 例: 共感を求める、自慢する、愚痴る、質問する、報告する、おすすめする
+- リアルな20代のツイート・ストーリーの温度感。
 
 投稿内容のみ出力。"""
 

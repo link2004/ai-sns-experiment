@@ -219,6 +219,8 @@ def load_personas() -> dict[str, dict]:
 
         # Derive name from filename: user_riku.json → riku
         name = fpath.stem.removeprefix("user_")
+        if name not in DISPLAY_NAMES:
+            continue
         sections = sc.get("sections", [])
         axis = sc.get("axis_scores", {})
 
@@ -419,15 +421,15 @@ def generate_day_context(persona: dict) -> dict:
 
 def should_post(behavior: dict, hour: int, posts_today: int) -> bool:
     """Decide if user posts at this hour."""
-    base = 0.25
+    base = 0.40
     if hour in behavior["active_hours"]:
-        base += 0.3
+        base += 0.30
     freq = behavior["frequency"]
     if freq == "high":
         base += 0.15
     elif freq == "low":
-        base -= 0.1
-    if posts_today >= 4:
+        base -= 0.05
+    if posts_today >= 6:
         base -= 0.15
     if posts_today >= 6:
         base -= 0.2

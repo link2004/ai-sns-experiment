@@ -36,7 +36,7 @@ API_KEY = os.getenv("OPEN_ROUTER_API_KEY")
 MODEL = "google/gemini-2.5-flash"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 HOURS = [7, 8, 9, 12, 13, 15, 18, 19, 20, 21, 22, 23]
-DISPLAY_NAMES = ["cochan16", "mio", "riku", "shuuuu2", "wataru"]
+DISPLAY_NAMES = ["wataru", "shuuuu2", "hana", "furukaho", "iii", "cochan16", "riku"]
 
 ANGLE_HINTS = [
     "五感に注目（見えてるもの、聞こえてる音、匂い）",
@@ -283,7 +283,10 @@ def load_personas() -> dict[str, dict]:
 # ============================================================
 
 STYLE_SYSTEM = """\
-You define a person's SNS writing style. Output JSON only. All text in Japanese."""
+You define a person's SNS writing style based on their real personality data.
+Output JSON only. All text in Japanese.
+CRITICAL: Think of real 20-something Japanese people posting on Twitter/Instagram Stories.
+Posts should feel like quick, unfiltered thoughts — NOT promotional content or brand statements."""
 
 STYLE_USER_TEMPLATE = """\
 以下の人物のSNS投稿の「文体」を定義してください。
@@ -307,22 +310,29 @@ STYLE_USER_TEMPLATE = """\
 以下のJSON形式で出力:
 {{
   "first_person": "この人が使う一人称（私/僕/俺/あたし/うち/自分 等）",
-  "sentence_endings": ["よく使う語尾を5つ（例: 〜だな、〜かも、〜なんだよね、〜じゃん、〜だわ）"],
-  "emoji_style": "絵文字の使い方（例: 使わない / たまに1個 / 多用する🎉✨ 等）",
-  "typical_length": "1投稿の文字数目安（例: 15-30文字）",
+  "sentence_endings": ["よく使う語尾を5つ。バリエーション豊富に（例: 〜だな、〜かも、〜なんだよね、〜わ、〜けど）"],
+  "emoji_style": "絵文字の使い方（例: 使わない / たまに1個 / 文末に1つ程度）",
+  "typical_length": "15-40文字（リアルなSNS投稿は短い。1〜2文が基本）",
   "quirks": ["この人特有の表現の癖を3つ（具体的に。例: 理系っぽい比喩を混ぜる）"],
   "tone_keywords": ["文体を表すキーワードを3つ（例: 知的、素朴、エモい）"],
-  "never_says": ["この人が絶対言わない表現を3つ"],
+  "never_says": ["この人が絶対言わない表現を5つ"],
   "example_posts": [
-    "架空のSNS投稿例1（この人のトピック・文体・語尾・絵文字を忠実に反映）",
+    "架空のSNS投稿例1",
     "架空のSNS投稿例2",
-    "架空のSNS投稿例3"
+    "架空のSNS投稿例3",
+    "架空のSNS投稿例4",
+    "架空のSNS投稿例5"
   ]
 }}
 
 重要:
 - example_postsはこの人の具体的なトピック（上記）を必ず含めること
-- 投稿例は20〜80文字の自然なSNS投稿にすること
+- 投稿例は15〜40文字。1〜2文。句読点少なめ。つぶやき感覚。
+- リアルな20代日本人のTwitter/Instagramストーリーの温度感にすること
+- 「素敵」「最高」「幸せ」「充実」など陳腐なポジティブワードの多用禁止
+- 同じ絵文字やフレーズを繰り返さないこと
+- ハッシュタグは使わない
+- 5つの投稿例はそれぞれ違うトーン（楽しい/だるい/ぼーっと/ちょっとイラッ/しみじみ）にすること
 - 全ての項目をこの人の個性に合わせて具体的に書くこと"""
 
 
@@ -389,7 +399,7 @@ def generate_day_context(persona: dict) -> dict:
         day_topics="、".join(day_topics),
         hours=", ".join(str(h) for h in HOURS),
     )
-    return call_llm_json(STAGE0_SYSTEM, prompt, temperature=1.0)
+    return call_llm_json(STAGE0_SYSTEM, prompt, temperature=1.0, max_tokens=500)
 
 
 # ============================================================
@@ -501,7 +511,7 @@ def generate_internal_state(
         lines = [f"  [{p['time']}] {p['user']}: {p['text']}" for p in recent_posts[-5:]]
         timeline_block = "【タイムライン（最近見た投稿）】\n" + "\n".join(lines)
     else:
-        timeline_block = "（タ��ムラインは見ていない。自分の世界に没頭中）"
+        timeline_block = "（タイムラインは見ていない。自分の世界に没頭中）"
 
     # Already posted
     posted_text = "（まだ投稿していない）"
@@ -530,7 +540,9 @@ def generate_internal_state(
 
 STAGE2_SYSTEM = """\
 You write a single SNS post as a specific person.
-Output ONLY the post text. No explanation, no quotes."""
+Output ONLY the post text. No explanation, no quotes, no hashtags.
+The post MUST be 15-50 characters. Think real Twitter/Instagram Story — short, raw, unfiltered.
+NEVER sound like an advertisement, manifesto, or motivational quote."""
 
 STAGE2_USER_TEMPLATE = """\
 この人としてSNS投稿を1つ書いてください。
@@ -539,11 +551,11 @@ STAGE2_USER_TEMPLATE = """\
 一人称: {first_person}
 語尾: {endings}
 絵文字: {emoji_style}
-文の長さ: {typical_length}
+文の長さ: 15〜50文字。1〜2文まで。短いほど良い。
 癖: {quirks}
 絶対言わない: {never_says}
 
-【投稿例（雰囲気の参考。コピーするな）】
+【投稿例（雰囲気の参考。コピーするな。同じ単語を使うな）】
 {example_posts}
 
 【今の内面】
@@ -552,20 +564,39 @@ STAGE2_USER_TEMPLATE = """\
 感情: {emotion}
 意図: {posting_intent}
 
+ルール:
+- 15〜50文字厳守。超えたら失敗。
+- 1〜2文まで。ダラダラ書かない。
+- ハッシュタグ禁止。
+- 「最高」「素敵」「充実」「幸せ」の多用禁止。
+- 投稿例の単語やフレーズをそのまま使うな。
+- 説明的にならない。感情の断片だけ出す。
+- リアルな20代のつぶやきのように。
+
 投稿内容のみ出力。"""
 
 
-def generate_post(persona: dict, internal_state: dict) -> str:
+def generate_post(persona: dict, internal_state: dict, already_posted: list[str]) -> str:
     """Stage 2: Generate post driven by style profile."""
     sp = persona["style_profile"]
     if not sp:
         return internal_state.get("raw_thought", "...")
 
+    # Build a ban list from previous posts to avoid repetition
+    ban_words = set()
+    for prev in already_posted[-3:]:
+        # Extract katakana/English words that might be repeated catchphrases
+        for word in re.findall(r'[ァ-ヶー]{3,}|[A-Za-z]{3,}', prev):
+            ban_words.add(word)
+
+    ban_text = ""
+    if ban_words:
+        ban_text = f"\n- 以下の単語は過去投稿で使用済。使うな: {', '.join(ban_words)}"
+
     prompt = STAGE2_USER_TEMPLATE.format(
         first_person=sp.get("first_person", "私"),
         endings="、".join(sp.get("sentence_endings", [])),
         emoji_style=sp.get("emoji_style", "控えめ"),
-        typical_length=sp.get("typical_length", "20-60文字"),
         quirks="、".join(sp.get("quirks", [])),
         never_says="、".join(sp.get("never_says", [])),
         example_posts="\n".join(f"  - {p}" for p in sp.get("example_posts", [])),
@@ -573,8 +604,8 @@ def generate_post(persona: dict, internal_state: dict) -> str:
         raw_thought=internal_state.get("raw_thought", ""),
         emotion=internal_state.get("emotion", ""),
         posting_intent=internal_state.get("posting_intent", ""),
-    )
-    text = call_llm(STAGE2_SYSTEM, prompt, temperature=0.9, max_tokens=150)
+    ) + ban_text
+    text = call_llm(STAGE2_SYSTEM, prompt, temperature=0.9, max_tokens=100)
     return text.strip().strip('"').strip("「」")
 
 
@@ -710,7 +741,7 @@ def main():
 
             # Stage 2
             try:
-                text = generate_post(persona, state)
+                text = generate_post(persona, state, user_post_history[uid])
             except Exception as e:
                 if debug:
                     print(f"  \033[31m[{hour:02d}h] {uid} Stage 2 error: {e}\033[0m")

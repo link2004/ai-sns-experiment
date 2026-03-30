@@ -761,6 +761,41 @@ def main():
             print_post(post)
             time.sleep(0.3)
 
+    # --- Guarantee minimum 2 posts per user ---
+    MIN_POSTS = 2
+    for uid in personas:
+        while len(user_post_history[uid]) < MIN_POSTS:
+            persona = personas[uid]
+            # Pick a random active hour for this catch-up post
+            hour = random.choice(persona["behavior"]["active_hours"])
+            try:
+                state, selected_topics = generate_internal_state(
+                    persona, hour,
+                    day_contexts[uid],
+                    all_posts,
+                    user_post_history[uid],
+                    used_topics[uid],
+                )
+                # Force posting even if wants_to_post is False
+                text = generate_post(persona, state, user_post_history[uid])
+            except Exception as e:
+                if debug:
+                    print(f"  \033[31m[catch-up] {uid} error: {e}\033[0m")
+                break
+
+            used_topics[uid].update(selected_topics)
+            time_str = f"{hour:02d}:{random.randint(0, 59):02d}"
+            post = {
+                "user": persona["display_name"],
+                "time": time_str,
+                "text": text,
+                "internal_state": state,
+            }
+            all_posts.append(post)
+            user_post_history[uid].append(text)
+            print_post(post)
+            time.sleep(0.3)
+
     # --- Summary ---
     print(f"{'─' * 52}")
     print(f"  Total posts: {len(all_posts)}  (skipped: {skipped})")

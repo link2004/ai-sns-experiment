@@ -33,7 +33,7 @@ DATA_DIR = BASE_DIR / "data"
 # ============================================================
 
 API_KEY = os.getenv("OPEN_ROUTER_API_KEY")
-MODEL = "google/gemini-2.5-flash"
+MODEL = "google/gemini-3-flash-preview"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 HOURS = [7, 8, 9, 12, 13, 15, 18, 19, 20, 21, 22, 23]
 DISPLAY_NAMES = ["wataru", "shuuuu2", "hana", "furukaho", "iii", "cochan16", "riku"]
@@ -297,8 +297,9 @@ def load_personas() -> dict[str, dict]:
 STYLE_SYSTEM = """\
 You define a person's SNS writing style based on their real personality data.
 Output JSON only. All text in Japanese.
-CRITICAL: Think of real 20-something Japanese people posting on Twitter/Instagram Stories.
-Posts should feel like quick, unfiltered thoughts — NOT promotional content or brand statements."""
+CRITICAL: Exaggerate their personality traits to be FUNNY. Make them a caricature of themselves.
+If they like ramen, they should be OBSESSED with ramen. If they study hard, everything becomes a study metaphor.
+Think: the funniest version of this person's Twitter. Their friends would laugh reading it."""
 
 STYLE_USER_TEMPLATE = """\
 以下の人物のSNS投稿の「文体」を定義してください。
@@ -322,9 +323,7 @@ STYLE_USER_TEMPLATE = """\
 以下のJSON形式で出力:
 {{
   "first_person": "この人が使う一人称（私/僕/俺/あたし/うち/自分 等）",
-  "sentence_endings": ["よく使う語尾を5つ。バリエーション豊富に（例: 〜だな、〜かも、〜なんだよね、〜わ、〜けど）"],
   "emoji_style": "絵文字の使い方（例: 使わない / たまに1個 / 文末に1つ程度）",
-  "typical_length": "15-40文字（リアルなSNS投稿は短い。1〜2文が基本）",
   "quirks": ["この人特有の表現の癖を3つ（具体的に。例: 理系っぽい比喩を混ぜる）"],
   "tone_keywords": ["文体を表すキーワードを3つ（例: 知的、素朴、エモい）"],
   "never_says": ["この人が絶対言わない表現を5つ"],
@@ -345,7 +344,9 @@ STYLE_USER_TEMPLATE = """\
 - 同じ絵文字やフレーズを繰り返さないこと
 - ハッシュタグは使わない
 - 5つの投稿例はそれぞれ違うトーン（楽しい/だるい/ぼーっと/ちょっとイラッ/しみじみ）にすること
-- 全ての項目をこの人の個性に合わせて具体的に書くこと"""
+- 全ての項目をこの人の個性に合わせて具体的に書くこと
+- 敬語・丁寧語は絶対禁止（〜です、〜ます、〜ですね、〜してます は使わない）
+- タメ口・カジュアルな口調のみ"""
 
 
 def generate_style_profile(persona: dict) -> dict:
@@ -558,23 +559,23 @@ def generate_internal_state(
 # ============================================================
 
 STAGE2_SYSTEM = """\
-You write a single SNS post as a specific person.
+You write a single FUNNY SNS post as a specific person.
 Output ONLY the post text. No explanation, no quotes, no hashtags.
-The post MUST be 15-50 characters. Think real Twitter/Instagram Story.
-CRITICAL: This is a PUBLIC post. The person knows their followers are watching.
-They are NOT talking to themselves. They are posting FOR an audience.
-Think: sharing, flexing, complaining to followers, asking opinions, reacting to something."""
+The post MUST be 15-50 characters.
+CRITICAL: Be FUNNY. Exaggerate their obsessions. Make their friends laugh.
+If they love ramen, EVERYTHING is about ramen. If they code, they see the world as code.
+Think: the funniest person in your friend group's Twitter. Absurd, self-aware humor."""
 
 STAGE2_USER_TEMPLATE = """\
 この人としてSNS投稿を1つ書いてください。
 
 【文体ルール（厳守）】
 一人称: {first_person}
-語尾: {endings}
 絵文字: {emoji_style}
 文の長さ: 15〜50文字。1〜2文まで。短いほど良い。
 癖: {quirks}
 絶対言わない: {never_says}
+敬語・丁寧語は絶対禁止。タメ口のみ。
 
 【投稿例（雰囲気の参考。コピーするな。同じ単語を使うな）】
 {example_posts}
@@ -591,10 +592,11 @@ STAGE2_USER_TEMPLATE = """\
 - ハッシュタグ禁止。
 - 「最高」「素敵」「充実」「幸せ」の多用禁止。
 - 投稿例の単語やフレーズをそのまま使うな。
-- これは公開投稿。フォロワーが見ていることを意識した文章にする。
-- 独り言・心の声ではない。「みんなに向けて発信してる」感覚。
-- 例: 共感を求める、自慢する、愚痴る、質問する、報告する、おすすめする
-- リアルな20代のツイート・ストーリーの温度感。
+- フォロワーに向けた投稿。見た人がクスッと笑える内容。
+- この人の「沼」「執着」「あるある」を全面に出す。
+- 自虐、大げさ、ツッコミ待ち、なんでもあり。
+- 敬語禁止。タメ口のみ。
+- 真面目すぎる投稿は失敗。面白さ優先。
 
 投稿内容のみ出力。"""
 
@@ -604,19 +606,19 @@ STAGE2_USER_TEMPLATE = """\
 # ============================================================
 
 REPLY_SYSTEM = """\
-You write a short reply to someone's SNS post as a specific person.
+You write a short FUNNY reply to someone's SNS post as a specific person.
 Output ONLY the reply text. No explanation, no quotes.
 The reply MUST be 10-40 characters. Very short and casual.
-This is a friend replying to a friend. NEVER use keigo (敬語禁止).
-Think: real LINE reply, Twitter reply, casual banter between friends."""
+NEVER use keigo. Think: roasting your friend, banter, ツッコミ.
+Be funny. Tease them. Call them out. Or agree in the most absurd way."""
 
 REPLY_USER_TEMPLATE = """\
 {replier_name}として、{poster_name}の投稿に返信してください。
 
 【{replier_name}の文体】
 一人称: {first_person}
-語尾: {endings}
 絵文字: {emoji_style}
+敬語禁止。タメ口のみ。
 
 【{poster_name}の投稿】
 「{post_text}」
@@ -628,9 +630,10 @@ SNS上の友達。カジュアルな関係。
 - 10〜40文字。短いほど良い。
 - 敬語禁止。タメ口のみ。
 - 友達にLINEで返すくらいのノリ。
-- 共感、ツッコミ、便乗、質問、からかい、どれでもOK。
-- 相手の投稿内容に具体的にリアクションすること。
-- 「わかる」「それな」だけで終わらない。もう少し具体的に。
+- ツッコミ、いじり、便乗、からかい、大げさな共感、どれでもOK。
+- 面白さ優先。真面目な返信は禁止。
+- 「わかる」「それな」だけで終わらない。もう少しふざけて。
+- 相手をいじるくらいがちょうどいい。
 
 返信内容のみ出力。"""
 
@@ -645,7 +648,6 @@ def generate_reply(replier: dict, poster_name: str, post_text: str) -> str:
         replier_name=replier["display_name"],
         poster_name=poster_name,
         first_person=sp.get("first_person", "私"),
-        endings="、".join(sp.get("sentence_endings", [])),
         emoji_style=sp.get("emoji_style", "控えめ"),
         post_text=post_text,
     )
@@ -719,7 +721,6 @@ def generate_post(persona: dict, internal_state: dict, already_posted: list[str]
 
     prompt = STAGE2_USER_TEMPLATE.format(
         first_person=sp.get("first_person", "私"),
-        endings="、".join(sp.get("sentence_endings", [])),
         emoji_style=sp.get("emoji_style", "控えめ"),
         quirks="、".join(sp.get("quirks", [])),
         never_says="、".join(sp.get("never_says", [])),
@@ -794,7 +795,6 @@ def main():
             print(f"  \033[31m  {uid}: Style profile failed: {e}\033[0m")
             persona["style_profile"] = {
                 "first_person": "私",
-                "sentence_endings": ["〜だな", "〜かも"],
                 "emoji_style": "控えめ",
                 "typical_length": "20-60文字",
                 "quirks": [],
